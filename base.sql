@@ -26,3 +26,7 @@ create table animal(
     id_categorie int not null references categorie(id_categorie),
     id_pays int not null references pays(id_pays)
 );
+create table favoris(
+    id_user int not null references customer(id_user),
+    id_animal int not null references animal(id_animal)
+);
