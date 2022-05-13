@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
+        <entry key="..\:/etudes/s7/mobile-android/projetAndroid/app/src/main/res/layout/activity_main.xml" value="0.1" />
+=======
         <entry key="..\:/Users/Mamitiana/AndroidStudioProjects/LaFamilleDesAnimaux/app/src/main/res/layout/activity_main.xml" value="0.19635416666666666" />
+>>>>>>> 8ae426b (splash)
       </map>
     </option>
   </component>
