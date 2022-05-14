@@ -56,8 +56,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="center|center_horizontal|center_vertical"
-                    android:inputType="textPersonName"
-                    android:text="Nom" />
+                    android:inputType="textPersonName" />
             </LinearLayout>
 
             <LinearLayout
@@ -83,8 +82,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="center_horizontal|center_vertical"
-                    android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:inputType="textPersonName" />
 
             </LinearLayout>
 
@@ -103,7 +101,7 @@
                 android:layout_gravity="center|center_horizontal|center_vertical"
                 android:layout_weight="1"
                 android:gravity="center|center_horizontal|center_vertical"
-                android:text="S'inscrire" />
+                android:text="Se connecter" />
 
             <TextView
                 android:id="@+id/lblLink"
@@ -111,8 +109,9 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center|center_horizontal|center_vertical"
                 android:layout_weight="1"
+                android:clickable="true"
                 android:gravity="center|center_horizontal|center_vertical"
-                android:text="TextView" />
+                android:text="S'inscrire" />
         </LinearLayout>
 
     </LinearLayout>

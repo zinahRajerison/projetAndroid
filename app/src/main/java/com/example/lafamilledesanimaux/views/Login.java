@@ -12,6 +12,7 @@ import android.widget.Toast;
 import android.view.View;
 
 import com.example.lafamilledesanimaux.R;
+import com.example.lafamilledesanimaux.controllers.UserController;
 
 
 public class Login extends AppCompatActivity {
@@ -20,12 +21,15 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        init();
+        this.control = UserController.getInstance();
     }
     //proprietes
     private EditText txtName;
     private EditText txtPwd;
     private Button btnLogin;
     private TextView lblLink;
+    private UserController control;
     /**
      * initialisaiton des liens avec les objets graphiqyes
      */
@@ -37,22 +41,7 @@ public class Login extends AppCompatActivity {
         submitListener();
     }
     private void submitListener(){
-        ((Button) findViewById(R.id.btnLogin)).setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View v){
-//                Toast.makeText(MainActivity.this,"test",Toast.LENGTH_SHORT).show();
-//                Log.d(tag:"message",msg:"clic ok sur le btn");
-                String name = "";
-                String pwd = "";
-                //recuperation des donnees saisies
-                try{
-                    name=txtName.getText().toString();
-                    pwd=txtName.getText().toString();
-                    Log.d("message", "name"+name);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
+
         ((TextView) findViewById(R.id.lblLink)).setOnClickListener(new TextView.OnClickListener(){
             public void onClick(View v){
 //                Toast.makeText(MainActivity.this,"test",Toast.LENGTH_SHORT).show();
@@ -62,6 +51,23 @@ public class Login extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), SignUp.class);
                     startActivity(i);
                     Log.d("message", "link");
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+        ((Button) findViewById(R.id.btnLogin)).setOnClickListener(new Button.OnClickListener(){
+            public void onClick(View v){
+                Toast.makeText(Login.this,"test",Toast.LENGTH_SHORT).show();
+//                Log.d(tag:"message",msg:"clic ok sur le btn");
+                String name = "";
+                String pwd = "";
+                //recuperation des donnees saisies
+                try{
+                    name=txtName.getText().toString();
+                    pwd=txtName.getText().toString();
+                    control.login(name,pwd);
+                    Log.d("message", "name"+name);
                 }catch (Exception e){
                     e.printStackTrace();
                 }

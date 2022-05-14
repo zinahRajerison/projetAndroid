@@ -17,4 +17,7 @@ public class User {
     private void signup(){
 
     }
+    private boolean seLogger(){
+        
+    }
 }
