@@ -54,4 +54,7 @@ public class User {
                     }
                 });
     }
+    private boolean seLogger(){
+        
+    }
 }

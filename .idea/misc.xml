@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Mamitiana/AndroidStudioProjects/LaFamilleDesAnimaux/app/src/main/res/layout/activity_home.xml" value="0.147265625" />
         <entry key="..\:/Users/Mamitiana/AndroidStudioProjects/LaFamilleDesAnimaux/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/Mamitiana/AndroidStudioProjects/LaFamilleDesAnimaux/app/src/main/res/layout/activity_sign_up.xml" value="0.2" />
+        <entry key="..\:/Users/Mamitiana/AndroidStudioProjects/LaFamilleDesAnimaux/app/src/main/res/layout/activity_sign_up.xml" value="0.22" />
+        <entry key="..\:/etudes/s7/mobile-android/projetAndroid/app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="..\:/etudes/s7/mobile-android/projetAndroid/app/src/main/res/layout/activity_login.xml" value="0.11979166666666667" />
+        <entry key="..\:/etudes/s7/mobile-android/projetAndroid/app/src/main/res/layout/activity_main.xml" value="0.1" />
       </map>
     </option>
   </component>
