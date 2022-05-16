@@ -1,6 +1,9 @@
 package com.example.lafamilledesanimaux.controllers;
 
+import android.widget.Toast;
+
 import com.example.lafamilledesanimaux.models.User;
+import com.example.lafamilledesanimaux.views.Login;
 
 public final class UserController {
     private static UserController instance = null;
@@ -27,7 +30,7 @@ public final class UserController {
     public void createProfil(String name, String pwd ){
         userprofil = new User(name, pwd);
     }
-    public boolean login(String name,String pwd){
+    public void login(String name,String pwd){
         userprofil = new User(name,pwd);
         userprofil.seLogger();
     }

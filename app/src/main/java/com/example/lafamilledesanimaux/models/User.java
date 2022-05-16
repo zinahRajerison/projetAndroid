@@ -8,17 +8,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.lafamilledesanimaux.views.SignUp;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.HashMap;
 
 public class User {
 
+    private final String URL = "http://localhost:3000";
     int id;
     String name;
     String pwd;
+    Gson gson;
 
     public User(String name, String pwd) {
         this.name = name;
@@ -27,7 +33,6 @@ public class User {
     }
 
     public void signup(){
-        String URL = "http://localhost:3000/";
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("name", name);
         params.put("pwd", pwd);
@@ -54,7 +59,6 @@ public class User {
                     }
                 });
     }
-    private boolean seLogger(){
-        
+    public void seLogger() {
     }
 }
