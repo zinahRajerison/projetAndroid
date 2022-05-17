@@ -59,5 +59,10 @@ public class User {
                     }
                 });
     }
+<<<<<<< HEAD
     public void seLogger(){
+=======
+    public void seLogger() {
+>>>>>>> 8c55514c7702272c5c24ff468d6ff47fa20a78bd
+    }
 }

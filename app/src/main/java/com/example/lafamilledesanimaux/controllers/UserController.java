@@ -1,6 +1,9 @@
 package com.example.lafamilledesanimaux.controllers;
 
+import android.widget.Toast;
+
 import com.example.lafamilledesanimaux.models.User;
+import com.example.lafamilledesanimaux.views.Login;
 
 public final class UserController {
     private static UserController instance = null;
