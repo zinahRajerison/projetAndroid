@@ -83,7 +83,7 @@ public class Login extends AppCompatActivity {
                              public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 //                                 progressDialog.dismiss(); //dismiss progress dialog
                                  if(response.body()!= null) {
-                                     Log.d("response",response.body().toString());
+                                     Log.d("tafiditra",response.body().toString());
     //                                 Log.i(TAG, "post submitted to API." + response.body().toString());
     //                                 Intent intent=new Intent(Login.this,Homes.class);
     //                                 startActivity(intent);
