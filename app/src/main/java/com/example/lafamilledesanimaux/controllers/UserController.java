@@ -27,8 +27,9 @@ public final class UserController {
         return UserController.instance;
     }
 
-    public void createProfil(String name, String pwd ){
+    public void createProfil(String name, String pwd){
         userprofil = new User(name, pwd);
+        userprofil.signup();
     }
     public void login(String name,String pwd){
         userprofil = new User(name,pwd);

@@ -29,7 +29,7 @@ public class SignUp extends AppCompatActivity {
     private UserController control;
 
     /**
-     * Initilisation des liens avec les objts graphiques
+     * Initilisation des liens avec les objets graphiques
      */
     private void init(){
         txtName = (EditText)findViewById(R.id.personName);
@@ -50,8 +50,8 @@ public class SignUp extends AppCompatActivity {
                 String conf = txtConfirmation.getText().toString();
 
                 if(pwd.compareTo(conf) == 0){
-                    control.createProfil(name, pwd);
-                    Intent homeIntent = new Intent(SignUp.this, List.class);
+                    // control.createProfil(name, pwd);
+                    Intent homeIntent = new Intent(SignUp.this, HomeActivity.class);
                     startActivity(homeIntent);
                     finish();
                 }else{
