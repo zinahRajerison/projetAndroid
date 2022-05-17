@@ -60,27 +60,6 @@ public class User {
             e.printStackTrace();
         }
 
-        /*JsonObjectRequest jsonobject = new JsonObjectRequest(Request.Method.POST, URL,
-                new JSONObject(params),
-                new Response.Listener<JSONObject>(){
-                    @Override
-                    public void onResponse(JSONObject response){
-                        Log.d("message", "Nouvelle inscription");
-                        try{
-                            DisplayText.setText(response.getString("message"));
-                            Log.d("message", "Nouvelle inscription");
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error){
-                        // DisplayText.setText("That didn't work!");
-                        Log.d("message", "Erreur sur l'inscription");
-                    }
-                });*/
     }
     public void seLogger(){}
 }
