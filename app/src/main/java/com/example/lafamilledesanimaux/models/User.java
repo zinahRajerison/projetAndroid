@@ -54,7 +54,6 @@ public class User {
                     }
                 });
     }
-    private boolean seLogger(){
-        
+    public void seLogger(){
     }
 }

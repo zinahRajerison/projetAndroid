@@ -27,7 +27,7 @@ public final class UserController {
     public void createProfil(String name, String pwd ){
         userprofil = new User(name, pwd);
     }
-    public boolean login(String name,String pwd){
+    public void login(String name,String pwd){
         userprofil = new User(name,pwd);
         userprofil.seLogger();
     }

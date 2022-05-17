@@ -51,7 +51,7 @@ public class SignUp extends AppCompatActivity {
 
                 if(pwd.compareTo(conf) == 0){
                     control.createProfil(name, pwd);
-                    Intent homeIntent = new Intent(SignUp.this, HomeActivity.class);
+                    Intent homeIntent = new Intent(SignUp.this, List.class);
                     startActivity(homeIntent);
                     finish();
                 }else{
