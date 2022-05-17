@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 const app = express();
 var user = require('./src/User.js')
 var helper = require('./src/Helper.js');
+var reponse = require('./src/Response.js');
 const port = process.env.PORT || 3000;
 
 app.listen(port);
@@ -29,7 +30,7 @@ app.use(function(req, res, next){
 });
 
 app.get('/', function (req, res) {
-  res.send('Hello World');
+  return new reponse(200,"HELLOwORLD",null);
 });
 app.get('/login',function(req,res){
       new helper().seConnecter().then(function(pool){
