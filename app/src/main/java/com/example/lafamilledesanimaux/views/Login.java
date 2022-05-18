@@ -19,6 +19,7 @@ import com.example.lafamilledesanimaux.controllers.UserController;
 import com.example.lafamilledesanimaux.models.LoginResponse;
 import com.example.lafamilledesanimaux.models.RetrofitClientInstance;
 import com.example.lafamilledesanimaux.models.User;
+import com.example.lafamilledesanimaux.models.UserResponse;
 import com.example.lafamilledesanimaux.models.UserService;
 
 import retrofit2.Call;
@@ -71,10 +72,10 @@ public class Login extends AppCompatActivity {
         });
         ((Button) findViewById(R.id.btnLogin)).setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v){
-//                final ProgressDialog progressDialog = new ProgressDialog(Login.this);
-//                progressDialog.setCancelable(false); // set cancelable to false
-//                progressDialog.setMessage("Chargement"); // set message
-//                progressDialog.show(); // show progress dialog
+                final ProgressDialog progressDialog = new ProgressDialog(Login.this);
+                progressDialog.setCancelable(false); // set cancelable to false
+                progressDialog.setMessage("Chargement"); // set message
+                progressDialog.show(); // show progress dialog
                 User user= new User(txtName.getText().toString(),txtPwd.getText().toString());
                 UserService userservice = RetrofitClientInstance.getRetrofitInstance().create(UserService.class);
                 userservice.login(user).enqueue(
@@ -83,10 +84,12 @@ public class Login extends AppCompatActivity {
                              public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 //                                 progressDialog.dismiss(); //dismiss progress dialog
                                  if(response.body()!= null) {
+                                     UserResponse user=response.body().getData();
+                                     Log.d("username",user.getName());
                                      Log.d("tafiditra",response.body().toString());
-    //                                 Log.i(TAG, "post submitted to API." + response.body().toString());
-    //                                 Intent intent=new Intent(Login.this,Homes.class);
-    //                                 startActivity(intent);
+                                     insertSession(user);
+                                     Intent intent=new Intent(Login.this,List.class);
+                                     startActivity(intent);
                                  }else {
                                      Toast.makeText(Login.this, "Login ou mots de passe incorrecte", Toast.LENGTH_SHORT).show();
                                  }
@@ -98,7 +101,7 @@ public class Login extends AppCompatActivity {
                                  t.printStackTrace();
                                  Log.d("error",t.getStackTrace().toString());
                                  Toast.makeText(Login.this, t.getMessage(), Toast.LENGTH_LONG).show();
-//                                 progressDialog.dismiss(); //dismiss progress dialog
+                                 progressDialog.dismiss(); //dismiss progress dialog
                              }
                         });
                     }
@@ -108,11 +111,11 @@ public class Login extends AppCompatActivity {
     /**
      * Fonction save preference
      */
-    public void logIn(String name,String pwd)  {
-        SharedPreferences sharedPreferences= this.getSharedPreferences("userIdentity", Context.MODE_PRIVATE);
+    public void insertSession(UserResponse user)  {
+        SharedPreferences sharedPreferences= this.getSharedPreferences("userToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("name", name);
-        editor.putString("login", pwd);
+        editor.putString("id", new Integer(user.getId()).toString());
+        editor.putString("info", user.getName());
         editor.apply();
     }
 }
