@@ -34,9 +34,24 @@ public class Animal {
         ArrayList<Animal> animal = new ArrayList<Animal>();
         Animal temp;
         String name = "";
-        String path = "img1.jpg";
+        String path = "";
         for(int i=0; i<25; i++){
             name = "Animal" + i;
+            path = "img" + i;
+            temp = new Animal(path, name);
+            animal.add(temp);
+        }
+        return animal;
+    }
+
+    public ArrayList<Animal> getListByCriteria(String input, String criteria){
+        ArrayList<Animal> animal = new ArrayList<Animal>();
+        Animal temp;
+        String name = "";
+        String path = "";
+        for(int i=0; i<2; i++){
+            name = "Animal" + i;
+            path = "img" + i;
             temp = new Animal(path, name);
             animal.add(temp);
         }

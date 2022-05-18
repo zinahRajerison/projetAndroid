@@ -1,12 +1,14 @@
 package com.example.lafamilledesanimaux.views;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+// import android.content.res.Resources;
 
 import com.example.lafamilledesanimaux.R;
 import com.example.lafamilledesanimaux.models.Animal;
@@ -17,10 +19,12 @@ public class ListAdapter extends BaseAdapter {
 
     private ArrayList<Animal> animal;
     private LayoutInflater inflater;
+    private Context context;
 
     public ListAdapter(Context context, ArrayList<Animal> list){
         this.animal = list;
         this.inflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     /**
@@ -81,7 +85,10 @@ public class ListAdapter extends BaseAdapter {
 
         // valorisation du contenu du holder (de la ligne)
         holder.textView4.setText(animal.get(i).getName().toString());
-        holder.imageView2.setImageResource(Integer.parseInt(animal.get(i).getImg()));
+        // int imageResource = this.context.getResources().getIdentifier(animal.get(i).getImg(), "drawable", context.getPackageName());
+        // Drawable res = this.context.getResources().getDrawable(imageResource);
+        // holder.imageView2.setImageDrawable(res);
+        // holder.imageView2.setImageResource(imageResource);
         holder.textView4.setTag(i);
         return view;
     }
