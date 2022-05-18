@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity {
                                      Log.d("username",user.getName());
                                      Log.d("tafiditra",response.body().toString());
                                      insertSession(user);
-                                     Intent intent=new Intent(Login.this,List.class);
+                                     Intent intent=new Intent(Login.this,Menu.class);
                                      startActivity(intent);
                                  }else {
                                      Toast.makeText(Login.this, "Login ou mots de passe incorrecte", Toast.LENGTH_SHORT).show();
