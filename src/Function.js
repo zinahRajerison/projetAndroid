@@ -48,7 +48,7 @@ class Function{
                 .then(results => {
                     resolve(results);
                 })
-                .catch(error => console.error(error))
+                .catch(reject(error))
             }).catch(
                 error => console.log("Connexion base de donnee echouee")
             )

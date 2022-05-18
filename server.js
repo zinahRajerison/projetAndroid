@@ -29,7 +29,7 @@ app.use(function(req, res, next){
     next();
 });
 
-app.post('/', function (req, res) {
+app.get('/', function (req, res) {
   res.send(new reponse(200,req.body.name,null))
   // res.send("Hello world");
 });
