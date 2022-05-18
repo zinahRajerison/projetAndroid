@@ -2,11 +2,11 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const app = express();
 var user = require('./src/User.js')
-var helper = require('./src/Helper.js');
+var func = require('./src/Function.js');
 var reponse = require('./src/Response.js');
 const port = process.env.PORT || 3000;
 
-app.listen(port);
+app.listen(3000);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -33,18 +33,14 @@ app.post('/', function (req, res) {
   res.send(new reponse(200,req.body.name,null))
   // res.send("Hello world");
 });
-app.get('/login',function(req,res){
-      new helper().seConnecter().then(function(pool){
-          console.log(pool);
-      }).catch(function(err){
-        console.log("error");
-      })
-      // new user(res.body.name,res.body.pwd).seLogger().then(function(user){
-      //     res.send(new reponse(200,"Connected",user))
-      // }).catch(function(error){
-      //     res.send(new reponse(400,error,null))
-      // })
+app.post('/login',function(req,res){
+    new func().seLogger(req.body.name,req.body.pwd).then(function(user){
+        res.send(new reponse(200,"Connected",user))
+    }).catch(function(error){
+        res.send(new reponse(400,error,null))
+    })
 });
+
 app.post('/signup', function(req, res){
   console.log(req.body.name);
   /*var newUser = new user(req.body.name, req.body.pwd);
@@ -64,4 +60,36 @@ app.post('/signup', function(req, res){
   }).catch(function(err){
     console.log("error");
   });*/
+});
+app.post('/findAnimal',function(req,res){
+  new func().rechercherAnimal(req.body).then(function(results){
+  var toRespond = new reponse(200,"Data gotten successfully",results);
+  res.send(toRespond);
+  }).catch( function(error){
+      var toRespond =new reponse(400,error,null);
+      res.send(toRespond)
+  })
+});
+app.get('/findAll',function(req,res){
+  var fonc=new func();
+  console.log(req.body)
+  fonc.findAll('animal').then(function(results){
+  var toRespond =new reponse(200,"Data gotten successfully",results);
+  res.send(toRespond);
+  }).catch( function(error){
+      var toRespond =new reponse(400,error,null);
+      res.send(toRespond)
+  })
+});
+app.get('/getFavoris/:id',function(req,res){
+  var fonc=new func();
+  var idUser = Number(req.params.id);
+  console.log(idUser)
+  fonc.getFavoris(idUser).then(function(results){
+  var toRespond = new reponse(200,"Data gotten successfully",results);
+  res.send(toRespond);
+  }).catch( function(error){
+      var toRespond =new reponse(400,error,null);
+      res.send(toRespond)
+  })
 });
