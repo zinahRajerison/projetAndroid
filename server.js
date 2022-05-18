@@ -29,8 +29,8 @@ app.use(function(req, res, next){
     next();
 });
 
-app.get('/', function (req, res) {
-  res.send(new reponse(200,"reussie",null))
+app.post('/', function (req, res) {
+  res.send(new reponse(200,req.body.name,null))
   // res.send("Hello world");
 });
 app.get('/login',function(req,res){
