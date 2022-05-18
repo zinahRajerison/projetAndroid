@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient
-var url="mongodb+srv://explorateurUser:123456@enfantexplorateur.rdjdr.mongodb.net/?retryWrites=true&w=majority"
+var url="mongodb+srv://explorateurUser:NzQ1veEDo3JDSW1l@enfantexplorateur.rdjdr.mongodb.net/?retryWrites=true&w=majority"
 // const url = 'mongodb://127.0.0.1:27017/'
 const dbName = 'explorateur'
 
