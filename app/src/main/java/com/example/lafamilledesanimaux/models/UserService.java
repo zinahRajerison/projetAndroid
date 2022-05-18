@@ -9,7 +9,7 @@ import retrofit2.http.POST;
 
 public interface UserService {
 
-    @GET("/")
+    @POST("/")
     public Call<LoginResponse> login(@Body User user);
 
     @POST("user/signup")
