@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient
-// var url="mongodb+srv://ekalyUser:2EAUIIgK6RUvnkHC@cluster0.ut6sd.mongodb.net/ekaly?retryWrites=true&w=majority"
-const url = 'mongodb://127.0.0.1:27017/'
+var url="mongodb+srv://explorateurUser:123456@enfantexplorateur.rdjdr.mongodb.net/?retryWrites=true&w=majority"
+// const url = 'mongodb://127.0.0.1:27017/'
 const dbName = 'explorateur'
 
 class Helper{
