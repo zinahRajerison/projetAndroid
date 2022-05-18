@@ -30,7 +30,8 @@ app.use(function(req, res, next){
 });
 
 app.get('/', function (req, res) {
-  res.send( new reponse(200,"HELLOwORLD",null));
+  // res.send( new reponse(200,"HELLOwORLD",null));
+  res.send("Hello world");
 });
 app.get('/login',function(req,res){
       new helper().seConnecter().then(function(pool){
