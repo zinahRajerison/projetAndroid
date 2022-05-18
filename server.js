@@ -6,7 +6,7 @@ var func = require('./src/Function.js');
 var reponse = require('./src/Response.js');
 const port = process.env.PORT || 3000;
 
-app.listen(3000);
+app.listen(port);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
