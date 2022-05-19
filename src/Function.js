@@ -97,7 +97,14 @@ class Function{
                 console.log(db);
                 var query = {"_id":(parseInt(id))}
                 console.log(query)
-                db.collection('animal').findOne(query)
+                db.collection('animal').aggregate([
+                    { $lookup: { from: 'categorie', localField: 'id_categorie', foreignField: '_id', as: 'categoriedetails' } },
+                    { $unwind: "$categoriedetails" },
+                    { $lookup: { from: 'pays', localField: 'id_pays', foreignField: '_id', as: 'paysdetails' } },
+                    { $unwind: "$paysdetails" },
+                    { $match: { '_id' : (parseInt(id)) } }
+                ]).toArray()
+                // db.collection('animal').findOne(query)
                 .then(result => {
                     console.log(result)
                     if(result==null){
@@ -109,7 +116,7 @@ class Function{
                 })
                 .catch(error => console.error(error))
             }).catch(
-                error => console.log("Connexion base de donnee echouee")
+                error => console.log(error)
             )
         })
     }
