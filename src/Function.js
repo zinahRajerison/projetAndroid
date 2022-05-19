@@ -68,6 +68,76 @@ class Function{
             )
         })
     }
+
+    signup =function(name,mdp){
+        return new Promise(function(resolve,reject){
+            new helper().seConnecter().then(function(db){
+                console.log(db);
+                // var nvmdp=sha256(mdp)
+                db.collection('User').find().limit(1).sort({$natural:-1}).toArray().then(result => {
+                    var query = {"_id":result[0]._id + 1,"nom_user":name,"mdp_user":mdp}
+                    console.log(query)
+                    db.collection('User').insertOne(query)
+                    .then(result => {
+                        console.log(result)
+                        resolve(true)
+                    })
+                    .catch(error => console.error(error))
+                })
+                .catch(error => console.error(error))
+            }).catch(
+                error => console.log("Connexion base de donnee echouee")
+            )
+        })
+    }
+
+    findById =function(id){
+        return new Promise(function(resolve,reject){
+            new helper().seConnecter().then(function(db){
+                console.log(db);
+                var query = {"_id":(parseInt(id))}
+                console.log(query)
+                db.collection('animal').findOne(query)
+                .then(result => {
+                    console.log(result)
+                    if(result==null){
+                        reject("pas d'animal");
+                    }
+                    else{
+                        resolve(result)
+                    }
+                })
+                .catch(error => console.error(error))
+            }).catch(
+                error => console.log("Connexion base de donnee echouee")
+            )
+        })
+    }
+
+    ajoutFavoris =function(id_animal, id_user){
+        return new Promise(function(resolve,reject){
+            new helper().seConnecter().then(function(db){
+                console.log(db);
+                db.collection('favoris').find().limit(1).sort({$natural:-1}).toArray().then(result => {
+                    var id = 0;
+                    if(result.length > 0){
+                        id = result[0]._id;
+                    }
+                    var query = {"_id":id + 1,"id_user":parseInt(id_user),"id_animal":parseInt(id_animal)}
+                    console.log(query)
+                    db.collection('favoris').insertOne(query)
+                    .then(result => {
+                        console.log(result)
+                        resolve(true)
+                    })
+                    .catch(error => console.error(error))
+                })
+                .catch(error => console.error(error))
+            }).catch(
+                error => console.log("Connexion base de donnee echouee")
+            )
+        });
+    }
     
 }
 module.exports = Function;

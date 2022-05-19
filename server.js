@@ -40,26 +40,13 @@ app.post('/login',function(req,res){
         res.send(new reponse(400,error,null))
     })
 });
-
 app.post('/signup', function(req, res){
   console.log(req.body.name);
-  /*var newUser = new user(req.body.name, req.body.pwd);
-  newUser.signup().then(function(err, result){
-    if(err){
-      console.log(err);
-      res.status(400).json({
-        status: 'error',
-        error: err,
-      });
-    }else{
-      res.status(200).json({
-        status: 'success',
-        data: result,
-      });
-    }
-  }).catch(function(err){
-    console.log("error");
-  });*/
+  new func().signup(req.body.name, req.body.pwd).then(function(verif){
+    res.send(new reponse(200,"Registered",verif))
+  }).catch(function(error){
+    res.send(new reponse(400,error,null))
+  })
 });
 app.post('/findAnimal',function(req,res){
   new func().rechercherAnimal(req.body).then(function(results){
@@ -91,5 +78,21 @@ app.get('/getFavoris/:id',function(req,res){
   }).catch( function(error){
       var toRespond =new reponse(400,error,null);
       res.send(toRespond)
+  })
+});
+app.post('/findById',function(req,res){
+  new func().findById(req.body.id).then(function(results){
+  var toRespond = new reponse(200,"Data gotten successfully",results);
+  res.send(toRespond);
+  }).catch( function(error){
+      var toRespond =new reponse(400,error,null);
+      res.send(toRespond)
+  })
+});
+app.post('/ajoutFavoris', function(req, res){
+  new func().ajoutFavoris(req.body.idanimal, req.body.iduser).then(function(verif){
+    res.send(new reponse(200,"Favorite saved",verif))
+  }).catch(function(error){
+    res.send(new reponse(400,error,null))
   })
 });
