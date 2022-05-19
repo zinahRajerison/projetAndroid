@@ -13,6 +13,9 @@
         android:theme="@style/Theme.LaFamilleDesAnimaux"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Fiche"
+            android:exported="false" />
+        <activity
             android:name=".views.Menu"
             android:exported="false" />
         <activity
