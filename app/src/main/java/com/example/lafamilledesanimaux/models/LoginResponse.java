@@ -13,7 +13,7 @@ public class LoginResponse {
     private int status ;
     @SerializedName("data")
     @Expose
-    private Object data ;
+    private UserResponse data ;
 
     public String getMessage() {
         return message;
@@ -31,11 +31,11 @@ public class LoginResponse {
         this.status = status;
     }
 
-    public Object getData() {
+    public UserResponse getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(UserResponse data) {
         this.data = data;
     }
 
