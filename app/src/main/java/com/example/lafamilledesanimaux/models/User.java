@@ -72,7 +72,8 @@ public class User {
             client.post(signupURL, reqparams, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
+                    String msg = new String(responseBody);
+                    Log.d("OnSuccess", msg + "********************************");
                 }
 
                 @Override
