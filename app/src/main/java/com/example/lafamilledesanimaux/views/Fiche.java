@@ -1,8 +1,10 @@
-package com.example.lafamilledesanimaux;
+package com.example.lafamilledesanimaux.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.lafamilledesanimaux.R;
 
 public class Fiche extends AppCompatActivity {
 
