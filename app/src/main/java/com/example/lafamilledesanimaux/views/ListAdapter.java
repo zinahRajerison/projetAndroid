@@ -90,6 +90,14 @@ public class ListAdapter extends BaseAdapter {
         // holder.imageView2.setImageDrawable(res);
         // holder.imageView2.setImageResource(imageResource);
         holder.textView4.setTag(i);
+
+        holder.textView4.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                int position = (int) view.getTag();
+                ((List) context).setIndice(position);
+            }
+        });
         return view;
     }
 

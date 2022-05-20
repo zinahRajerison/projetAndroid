@@ -24,7 +24,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class User {
 
-    private final String URL = "http://192.168.1.134:3000/";
+    private final String URL = "http://enfant-explorateur.herokuapp.com/";
     int id;
     String name;
     String pwd;

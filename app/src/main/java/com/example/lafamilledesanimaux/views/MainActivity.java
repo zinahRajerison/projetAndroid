@@ -1,12 +1,14 @@
 package com.example.lafamilledesanimaux.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.lafamilledesanimaux.R;
+import com.example.lafamilledesanimaux.controllers.ModeState;
 
 public class MainActivity extends AppCompatActivity {
 
