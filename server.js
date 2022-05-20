@@ -68,6 +68,30 @@ app.get('/findAll',function(req,res){
       res.send(toRespond)
   })
 });
+
+app.get('/findAllCategory',function(req,res){
+  var fonc=new func();
+  console.log(req.body)
+  fonc.findAll('categorie').then(function(results){
+  var toRespond =new reponse(200,"Data gotten successfully",results);
+  res.send(toRespond);
+  }).catch( function(error){
+      var toRespond =new reponse(400,error,null);
+      res.send(toRespond)
+  })
+});
+
+app.get('/findAllPays',function(req,res){
+  var fonc=new func();
+  console.log(req.body)
+  fonc.findAll('pays').then(function(results){
+  var toRespond =new reponse(200,"Data gotten successfully",results);
+  res.send(toRespond);
+  }).catch( function(error){
+      var toRespond =new reponse(400,error,null);
+      res.send(toRespond)
+  })
+});
 app.get('/getFavoris/:id',function(req,res){
   var fonc=new func();
   var idUser = Number(req.params.id);
