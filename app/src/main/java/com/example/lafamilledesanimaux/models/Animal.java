@@ -73,7 +73,6 @@ public class Animal {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     response[0] = responseBody;
-                    //Log.d("findAllAnimals", new String(responseBody));
                     try {
                         JSONObject obj = new JSONObject(new String(response[0]));
                         JSONArray first = obj.getJSONArray("data");
@@ -83,7 +82,6 @@ public class Animal {
                             JSONObject row = first.getJSONObject(i);
                             temp = new Animal(row.getInt("_id"), row.getString("nom_animal"));
                             animal.add(temp);
-                            // Log.d("findAllAnimals", "haha" + animal.get(i).getName());
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -105,16 +103,6 @@ public class Animal {
 
     public ArrayList<Animal> getListByCriteria(String input, String criteria){
         ArrayList<Animal> animal = new ArrayList<Animal>();
-        /*Animal temp;
-        String name = "";
-        String path = "";
-        for(int i=0; i<2; i++){
-            name = "Animal" + i;
-            path = "img" + i;
-            temp = new Animal(path, name);
-            animal.add(temp);
-        }
-        return animal;*/
         try {
             AsyncHttpClient client = new AsyncHttpClient();
             final byte[][] response = new byte[1][1];

@@ -2,10 +2,12 @@ package com.example.lafamilledesanimaux.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,15 +32,33 @@ public class List extends AppCompatActivity {
     private int iSelected = 0;
     ArrayList<Animal> animallist;
     private AnimalController controlAnimal;
+    private static int splash_time_out = 5000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        final ProgressDialog progressDialog = new ProgressDialog(List.this);
+        progressDialog.setCancelable(false); // set cancelable to false
+        progressDialog.setMessage("Chargement"); // set message
+        progressDialog.show();
+        new Handler().postDelayed(new Runnable(){
+
+            @Override
+            public void run(){
+                setContentView(R.layout.activity_list);
+                controlAnimal.getInstance();
+                animallist = controlAnimal.animalList;
+                init();
+                createList();
+                progressDialog.dismiss();
+            }
+        }, splash_time_out);
+
+        /*setContentView(R.layout.activity_list);
         controlAnimal.getInstance();
         animallist = controlAnimal.animalList;
         init();
-        createList();
+        createList();*/
     }
 
     private void init(){
