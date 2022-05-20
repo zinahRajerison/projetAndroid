@@ -23,12 +23,12 @@ public class AnimalFiche {
     @SerializedName("enfant")
     @Expose
     private String enfant;
-    @SerializedName("categoriedetails")
+    @SerializedName("categorie")
     @Expose
-    private Categoriedetails categoriedetails;
-    @SerializedName("paysdetails")
+    private Categorie categorie;
+    @SerializedName("pays")
     @Expose
-    private Paysdetails paysdetails;
+    private Pays pays;
 
     public Integer getId() {
         return id;
@@ -78,20 +78,19 @@ public class AnimalFiche {
         this.enfant = enfant;
     }
 
-    public Categoriedetails getCategoriedetails() {
-        return categoriedetails;
+    public Categorie getCategorie() {
+        return categorie;
     }
 
-    public void setCategoriedetails(Categoriedetails categoriedetails) {
-        this.categoriedetails = categoriedetails;
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
     }
 
-    public Pays getPaysdetails() {
-        return paysdetails;
+    public Pays getPays() {
+        return pays;
     }
 
-    public void setPaysdetails(Pays paysdetails) {
-        this.paysdetails = paysdetails;
+    public void setPays(Pays pays) {
+        this.pays = pays;
     }
-
 }
