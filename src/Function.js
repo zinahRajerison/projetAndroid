@@ -106,12 +106,12 @@ class Function{
                 ]).toArray()
                 // db.collection('animal').findOne(query)
                 .then(result => {
-                    console.log(result[0])
+                    console.log(result)
                     if(result==null){
                         reject("pas d'animal");
                     }
                     else{
-                        resolve(result)
+                        resolve(result[0])
                     }
                 })
                 .catch(error => console.error(error))
