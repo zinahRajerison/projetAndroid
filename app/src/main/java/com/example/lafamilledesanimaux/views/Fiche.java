@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.widget.VideoView;
 import com.example.lafamilledesanimaux.R;
 import com.example.lafamilledesanimaux.models.AnimalFiche;
 import com.example.lafamilledesanimaux.models.FicheResponse;
+import com.example.lafamilledesanimaux.models.Id;
 import com.example.lafamilledesanimaux.models.LoginResponse;
 import com.example.lafamilledesanimaux.models.RetrofitClientInstance;
 import com.example.lafamilledesanimaux.models.User;
@@ -61,7 +64,6 @@ public class Fiche extends AppCompatActivity {
         imgAnimal=(ImageView) findViewById(R.id.imgAnimal);
         submitListener();
         idAnimal = getIntent().getIntExtra("idanimal",0);
-        Log.d("idAnimal:",String.valueOf(this.idAnimal));
         setDataFiche();
     }
     /**
@@ -91,8 +93,9 @@ public class Fiche extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(Fiche.this);
         progressDialog.setCancelable(false); // set cancelable to false
         progressDialog.setMessage("Chargement"); // set message
+        Log.d("idAnimal:",String.valueOf(this.idAnimal));
         UserService userservice = RetrofitClientInstance.getRetrofitInstance().create(UserService.class);
-        userservice.findById(this.idAnimal).enqueue(
+        userservice.findById(new Id(this.idAnimal)).enqueue(
                 new Callback<FicheResponse>() {
                     @Override
                     public void onResponse(Call<FicheResponse> call, Response<FicheResponse> response) {
@@ -102,8 +105,20 @@ public class Fiche extends AppCompatActivity {
                             Toast.makeText(Fiche.this, "idAnimal"+String.valueOf(response.body().getStatus()), Toast.LENGTH_SHORT).show();
 
                             Log.d("status",String.valueOf(response.body().getStatus()));
-//                            Log.d("tafiditra",animal.getCategorie().getNom_categorie());
-//                            Intent intent=new Intent(Login.this,Menu.class);
+                            Log.d("tafiditra",animal.getCategorie().getNom_categorie());
+                            txtNameAnimal.setText(" Nom de l'animal : " +animal.getNomAnimal() );
+                            txtCategorie.setText("De categorie " +animal.getCategorie().getNom_categorie());
+                            txtPays.setText("Pays D'origine : "+animal.getPays().getNom_pays());
+                            txtFemelle.setText("Femelle : "+animal.getFemelle());
+                            txtEnfant.setText("Enfant : "+animal.getEnfant());
+
+                            String fnm = animal.getNomAnimal().toLowerCase(); //  this is image file name
+                            String PACKAGE_NAME = getApplicationContext().getPackageName();
+                            int imgId = getResources().getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
+                            System.out.println("IMG ID :: "+imgId);
+                            System.out.println("PACKAGE_NAME :: "+PACKAGE_NAME);
+//    Bitmap bitmap = BitmapFactory.decodeResource(getResources(),imgId);
+                            imgAnimal.setImageBitmap(BitmapFactory.decodeResource(getResources(),imgId));
 //                            startActivity(intent);
                         }else {
                             Toast.makeText(Fiche.this, "Login ou mots de passe incorrecte", Toast.LENGTH_SHORT).show();

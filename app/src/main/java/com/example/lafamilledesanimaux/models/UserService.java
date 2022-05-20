@@ -19,5 +19,5 @@ public interface UserService {
     public Call<LoginResponse> signUp(@Body User user);
 
     @POST("/findById")
-    public Call<FicheResponse> findById(@Query("id") int idAnimal);
+    public Call<FicheResponse> findById(@Body Id id);
 }

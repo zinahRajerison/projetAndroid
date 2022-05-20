@@ -29,7 +29,7 @@ public class Menu extends AppCompatActivity {
 
         ArrayList<CardModel> courseModelArrayList = new ArrayList<CardModel>();
         courseModelArrayList.add(new CardModel("Decouvre des animaux", R.drawable.liste));
-        courseModelArrayList.add(new CardModel("Quizz", R.drawable.img18));
+        courseModelArrayList.add(new CardModel("Quizz", R.drawable.img17));
         courseModelArrayList.add(new CardModel("Preferences", R.drawable.parametre));
 
         CardGVAdapter adapter = new CardGVAdapter(this, courseModelArrayList);
