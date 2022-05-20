@@ -50,7 +50,6 @@ public class Fiche extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fiche);
-        displayVideo();
         init();
     }
     private void init() {
@@ -62,6 +61,7 @@ public class Fiche extends AppCompatActivity {
         txtFemelle=(TextView) findViewById(R.id.txtFemelle);
         txtEnfant=(TextView) findViewById(R.id.txtEnfant);
         imgAnimal=(ImageView) findViewById(R.id.imgAnimal);
+        view = (VideoView)findViewById(R.id.criAnimal);
         submitListener();
         idAnimal = getIntent().getIntExtra("idanimal",0);
         setDataFiche();
@@ -81,11 +81,10 @@ public class Fiche extends AppCompatActivity {
             }
         });
     }
-    public void displayVideo(){
-        view = (VideoView)findViewById(R.id.criAnimal);
+    public void displayVideo(String fnm){
         getResources().getIdentifier("FILENAME_WITHOUT_EXTENSION",
                 "raw", getPackageName());
-        String path = "android.resource://" + getPackageName() + "/" + R.raw.baleine;
+        String path = "android.resource://" + getPackageName() + "/" + "raw/"+fnm;
         view.setVideoURI(Uri.parse(path));
     }
 
@@ -119,7 +118,8 @@ public class Fiche extends AppCompatActivity {
                             System.out.println("PACKAGE_NAME :: "+PACKAGE_NAME);
 //    Bitmap bitmap = BitmapFactory.decodeResource(getResources(),imgId);
                             imgAnimal.setImageBitmap(BitmapFactory.decodeResource(getResources(),imgId));
-//                            startActivity(intent);
+                            displayVideo(fnm);
+//                           startActivity(intent);
                         }else {
                             Toast.makeText(Fiche.this, "Login ou mots de passe incorrecte", Toast.LENGTH_SHORT).show();
                         }
