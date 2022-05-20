@@ -35,6 +35,16 @@ public class Animal {
         this.name = name;
     }
 
+    public Animal(int i, String img, String name) {
+        this.id = i;
+        this.img = img;
+        this.name = name;
+    }
+
+    public int getId(){
+        return id;
+    }
+
     public String getImg() {
         return img;
     }
@@ -53,19 +63,19 @@ public class Animal {
 
     public ArrayList<Animal> getList(){
         ArrayList<Animal> animal = new ArrayList<Animal>();
-        /*Animal temp;
+        Animal temp;
         String name = "";
         String path = "";
         for(int i=0; i<25; i++){
             name = "Animal" + i;
             path = "img" + i;
-            temp = new Animal(path, name);
+            temp = new Animal(i, path, name);
             animal.add(temp);
         }
-        return animal;*/
+        return animal;
 
 
-        try {
+        /*try {
             AsyncHttpClient client = new AsyncHttpClient();
             final byte[][] response = new byte[1][1];
             String signupURL = "http://enfant-explorateur.herokuapp.com/findAll";
@@ -98,7 +108,7 @@ public class Animal {
         }catch(Exception e){
             e.printStackTrace();
         }
-        return animal;
+        return animal;*/
     }
 
     public ArrayList<Animal> getListByCriteria(String input, String criteria){

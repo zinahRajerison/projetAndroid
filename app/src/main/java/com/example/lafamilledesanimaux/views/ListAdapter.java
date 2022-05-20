@@ -95,7 +95,8 @@ public class ListAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 int position = (int) view.getTag();
-                ((List) context).setIndice(position);
+                int id = animal.get((int) getItemId(position)).getId();
+                ((List) context).setIndice(id);
             }
         });
         return view;

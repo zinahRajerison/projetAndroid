@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -113,6 +114,7 @@ public class List extends AppCompatActivity {
 
     public void setIndice(int position) {
         Intent homeIntent = new Intent(List.this, Fiche.class);
+        Log.d("findAllAnimals", String.valueOf(position));
         homeIntent.putExtra("idanimal", position);
         startActivity(homeIntent);
         finish();
