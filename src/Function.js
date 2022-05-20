@@ -98,10 +98,10 @@ class Function{
                 var query = {"_id":(parseInt(id))}
                 console.log(query)
                 db.collection('animal').aggregate([
-                    { $lookup: { from: 'categorie', localField: 'id_categorie', foreignField: '_id', as: 'categoriedetails' } },
-                    { $unwind: "$categoriedetails" },
-                    { $lookup: { from: 'pays', localField: 'id_pays', foreignField: '_id', as: 'paysdetails' } },
-                    { $unwind: "$paysdetails" },
+                    { $lookup: { from: 'categorie', localField: 'id_categorie', foreignField: '_id', as: 'categorie' } },
+                    { $unwind: "$categorie" },
+                    { $lookup: { from: 'pays', localField: 'id_pays', foreignField: '_id', as: 'pays' } },
+                    { $unwind: "$pays" },
                     { $match: { '_id' : (parseInt(id)) } }
                 ]).toArray()
                 // db.collection('animal').findOne(query)
