@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +33,13 @@ public class Fiche extends AppCompatActivity {
     VideoView view;
     private Button btnPlay;
     private Button btnStop;
+    private TextView txtNameAnimal;
+    private TextView txtCategorie;
+    private TextView txtPays;
+    private TextView txtFemelle;
+    private TextView txtEnfant;
+    private ImageView imgAnimal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +50,12 @@ public class Fiche extends AppCompatActivity {
     private void init() {
         btnStop = (Button) findViewById(R.id.btnStop);
         btnPlay = (Button) findViewById(R.id.btnPlay);
+        txtNameAnimal=(TextView) findViewById(R.id.txtNameAnimal);
+        txtCategorie=(TextView) findViewById(R.id.txtCategorie);
+        txtPays=(TextView) findViewById(R.id.txtPays);
+        txtFemelle=(TextView) findViewById(R.id.txtFemelle);
+        txtEnfant=(TextView) findViewById(R.id.txtEnfant);
+        imgAnimal=(ImageView) findViewById(R.id.imgAnimal);
         submitListener();
     }
     /**
