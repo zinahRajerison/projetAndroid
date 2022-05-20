@@ -60,7 +60,9 @@ public class Fiche extends AppCompatActivity {
         txtEnfant=(TextView) findViewById(R.id.txtEnfant);
         imgAnimal=(ImageView) findViewById(R.id.imgAnimal);
         submitListener();
-        idAnimal = getIntent().getIntExtra("idAnimal",0);
+        idAnimal = getIntent().getIntExtra("idanimal",0);
+        Toast.makeText(Fiche.this, "idAnimal"+idAnimal, Toast.LENGTH_SHORT).show();
+        Log.d("idAnimal:",String.valueOf(this.idAnimal));
         setDataFiche();
     }
     /**
@@ -115,12 +117,5 @@ public class Fiche extends AppCompatActivity {
                         progressDialog.dismiss(); //dismiss progress dialog
                     }
                 });
-        }
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.activity_main, menu);
-//        return true;
-//    }
 }
