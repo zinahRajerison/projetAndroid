@@ -91,11 +91,8 @@ public class List extends AppCompatActivity {
     }
 
     public void setIndice(int position) {
-        SharedPreferences sharedPreferences= this.getSharedPreferences("userToken", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("idanimal", String.valueOf(position));
-        editor.apply();
         Intent homeIntent = new Intent(List.this, Fiche.class);
+        homeIntent.putExtra("idanimal", position);
         startActivity(homeIntent);
         finish();
     }
