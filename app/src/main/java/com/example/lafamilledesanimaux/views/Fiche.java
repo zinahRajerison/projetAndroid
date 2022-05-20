@@ -61,7 +61,6 @@ public class Fiche extends AppCompatActivity {
         imgAnimal=(ImageView) findViewById(R.id.imgAnimal);
         submitListener();
         idAnimal = getIntent().getIntExtra("idanimal",0);
-        Toast.makeText(Fiche.this, "idAnimal"+idAnimal, Toast.LENGTH_SHORT).show();
         Log.d("idAnimal:",String.valueOf(this.idAnimal));
         setDataFiche();
     }
@@ -100,8 +99,10 @@ public class Fiche extends AppCompatActivity {
 //                                 progressDialog.dismiss(); //dismiss progress dialog
                         if(response.body()!= null) {
                             AnimalFiche animal=response.body().getData();
-                            Log.d("username",animal.getNomAnimal());
-                            Log.d("tafiditra",animal.getCategorie().getNom_categorie());
+                            Toast.makeText(Fiche.this, "idAnimal"+String.valueOf(response.body().getStatus()), Toast.LENGTH_SHORT).show();
+
+                            Log.d("status",String.valueOf(response.body().getStatus()));
+//                            Log.d("tafiditra",animal.getCategorie().getNom_categorie());
 //                            Intent intent=new Intent(Login.this,Menu.class);
 //                            startActivity(intent);
                         }else {
