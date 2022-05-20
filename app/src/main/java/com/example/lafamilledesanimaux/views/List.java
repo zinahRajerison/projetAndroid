@@ -2,7 +2,9 @@ package com.example.lafamilledesanimaux.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.lafamilledesanimaux.R;
+import com.example.lafamilledesanimaux.controllers.AnimalController;
 import com.example.lafamilledesanimaux.models.Animal;
 
 import java.util.ArrayList;
@@ -26,12 +29,14 @@ public class List extends AppCompatActivity {
     String[] bankNames={"nom","pays","categorie"};
     private int iSelected = 0;
     ArrayList<Animal> animallist;
+    private AnimalController controlAnimal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        animallist = new Animal().getList();
+        controlAnimal.getInstance();
+        animallist = controlAnimal.animalList;
         init();
         createList();
     }
@@ -85,4 +90,13 @@ public class List extends AppCompatActivity {
         });
     }
 
+    public void setIndice(int position) {
+        SharedPreferences sharedPreferences= this.getSharedPreferences("userToken", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("idanimal", String.valueOf(position));
+        editor.apply();
+        Intent homeIntent = new Intent(List.this, Fiche.class);
+        startActivity(homeIntent);
+        finish();
+    }
 }

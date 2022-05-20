@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.lafamilledesanimaux.R;
+import com.example.lafamilledesanimaux.controllers.AnimalController;
 import com.example.lafamilledesanimaux.controllers.UserController;
 import com.example.lafamilledesanimaux.models.User;
 
@@ -29,6 +30,7 @@ public class SignUp extends AppCompatActivity {
     private EditText txtPwd;
     private EditText txtConfirmation;
     private UserController control;
+    private AnimalController controlAnimal;
 
     /**
      * Initilisation des liens avec les objets graphiques
@@ -38,6 +40,7 @@ public class SignUp extends AppCompatActivity {
         txtPwd = (EditText)findViewById(R.id.password);
         txtConfirmation = (EditText)findViewById(R.id.passwordConf);
         control.getInstance();
+        // controlAnimal.getInstance();
         submitListener();
     }
 
@@ -56,7 +59,7 @@ public class SignUp extends AppCompatActivity {
                     Log.d("profil", name);
                     User userprofil = new User(name, pwd);
                     userprofil.signup();
-                    Intent homeIntent = new Intent(SignUp.this, List.class);
+                    Intent homeIntent = new Intent(SignUp.this, Login.class);
                     startActivity(homeIntent);
                     finish();
                 }else{

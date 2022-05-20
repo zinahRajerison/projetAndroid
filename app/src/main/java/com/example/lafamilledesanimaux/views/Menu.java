@@ -54,7 +54,7 @@ public class Menu extends AppCompatActivity {
                         break;
                     case 2:
                         Toast.makeText(Menu.this, "parametre", Toast.LENGTH_SHORT).show();
-                        Intent intent2=new Intent(Menu.this,List.class);
+                        Intent intent2=new Intent(Menu.this,PreferenceActivity.class);
                         startActivity(intent2);
                         break;
                 }

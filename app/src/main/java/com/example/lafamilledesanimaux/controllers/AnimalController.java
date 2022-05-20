@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public final class AnimalController {
     private static AnimalController instance = null;
-    private static ArrayList<Animal> animalList = new ArrayList<Animal>();
+    public static ArrayList<Animal> animalList = new ArrayList<Animal>();
 
     /**
      * Constructeur privée
@@ -26,7 +26,5 @@ public final class AnimalController {
         AnimalController.animalList = new Animal().getList();
         return AnimalController.instance;
     }
-
-
 
 }
