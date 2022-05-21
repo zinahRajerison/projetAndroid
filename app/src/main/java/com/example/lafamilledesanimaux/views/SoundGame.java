@@ -31,7 +31,6 @@ public class SoundGame extends AppCompatActivity {
     private ListController controlAnimal;
     ArrayList<Integer> indices;
     TextView txtQuestion;
-    TextView txtFaute;
     int idReponse;
 
     @Override
@@ -48,7 +47,6 @@ public class SoundGame extends AppCompatActivity {
         controlAnimal.getInstance();
         animallist = controlAnimal.animalList;
         txtQuestion=(TextView) findViewById(R.id.txtQuest);
-        txtFaute=(TextView) findViewById(R.id.txtFaute);
         indices=new ArrayList<Integer>();
         setData();
         listener();
@@ -126,11 +124,11 @@ public class SoundGame extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(indices.get(position)!=idReponse)
                 {
-                    txtFaute.setText("Mauvaise reponse, reessayez!");
+                    Toast.makeText(SoundGame.this, "Mauvaise reponse, reessayez!", Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    Toast.makeText(SoundGame.this, "Bien joue", Toast.LENGTH_SHORT).show();
                     setData();
-                    txtFaute.setText("Bien joue");
                 }
             }
         });
