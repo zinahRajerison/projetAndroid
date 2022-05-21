@@ -50,11 +50,6 @@ public class List extends AppCompatActivity {
         animallist = controlAnimal.animalList;
         payslist = controlAnimal.paysList;
         categorielist = controlAnimal.categoryList;
-        /*try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
         new Handler().postDelayed(new Runnable(){
 
             @Override
@@ -128,9 +123,7 @@ public class List extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                // Toast.makeText(getApplicationContext(), bankNames[i], Toast.LENGTH_LONG).show();
                 iSelectedPays = iPays[i];
-                // Log.d("liste",bankNames[i]);
             }
 
             @Override
@@ -141,9 +134,7 @@ public class List extends AppCompatActivity {
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                // Toast.makeText(getApplicationContext(), bankNames[i], Toast.LENGTH_LONG).show();
                 iSelectedCat = iCategorie[i];
-                // Log.d("liste",bankNames[i]);
             }
 
             @Override
@@ -154,8 +145,20 @@ public class List extends AppCompatActivity {
         ((Button) findViewById(R.id.button)).setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 String nom = editTextName.getText().toString();
-                // Toast.makeText(getApplicationContext(), name + " " + criteria, Toast.LENGTH_LONG).show();
+                final ProgressDialog progressDialogClick = new ProgressDialog(List.this);
+                progressDialogClick.setCancelable(false); // set cancelable to false
+                progressDialogClick.setMessage("A la découverte des animaux"); // set message
+                progressDialogClick.show();
                 animallist = new Animal().getListByCriteria(nom, iSelectedPays, iSelectedCat);
+
+                new Handler().postDelayed(new Runnable(){
+
+                    @Override
+                    public void run(){
+                        createList();
+                        progressDialogClick.dismiss();
+                    }
+                }, splash_time_out);
                 createList();
             }
         });
