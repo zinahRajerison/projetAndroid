@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -19,6 +20,7 @@ import com.example.lafamilledesanimaux.models.CardGVAdapter;
 import com.example.lafamilledesanimaux.models.CardModel;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class SoundGame extends AppCompatActivity {
 
@@ -27,6 +29,10 @@ public class SoundGame extends AppCompatActivity {
     private boolean videostate;
     ArrayList<Animal> animallist;
     private ListController controlAnimal;
+    ArrayList<Integer> indices;
+    TextView txtQuestion;
+    TextView txtFaute;
+    int idReponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +47,49 @@ public class SoundGame extends AppCompatActivity {
         videostate = false;
         controlAnimal.getInstance();
         animallist = controlAnimal.animalList;
+        txtQuestion=(TextView) findViewById(R.id.txtQuest);
+        txtFaute=(TextView) findViewById(R.id.txtFaute);
+        indices=new ArrayList<Integer>();
         setData();
         listener();
     }
-    
+    private boolean testerAppartenance(int atester){
+        boolean ret= false;
+        for(int i=0;i<indices.size();i++){
+            if(atester==indices.get(i)){
+                return true;
+            }
+        }
+        return ret;
+    }
     private void setData(){
+        int randomfamille=new Random().nextInt(2);
+        if(randomfamille==0){
+            txtQuestion.setText("Quel est le nom de la femelle de l'animal qui porte ce cri?");
+        }else{
+            txtQuestion.setText("Comment appelle-t-on le nom de l'enfant de l'animal qui porte ce cri?");
+        }
+        int max = animallist.size();
+        while(indices.size()!=4){
+            int atester = new Random().nextInt(max);
+            if(!testerAppartenance(atester)){
+                indices.add(new Integer(atester));
+            }
+        }
+        this.idReponse=indices.get(new Random().nextInt(4));
+
         ArrayList<CardModel> choicesImg = new ArrayList<CardModel>();
-        choicesImg.add(new CardModel("choix1", R.drawable.img4));
-        choicesImg.add(new CardModel("choix2", R.drawable.img17));
-        choicesImg.add(new CardModel("choix3", R.drawable.img6));
-        choicesImg.add(new CardModel("choix4", R.drawable.img20));
+        for(int i=0;i<indices.size();i++){
+            String fnm = animallist.get(indices.get(i)).getName().toLowerCase(); //  this is image file name
+            String PACKAGE_NAME = getApplicationContext().getPackageName();
+            int imgId = getResources().getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
+            if(randomfamille==0){
+                choicesImg.add(new CardModel(animallist.get(indices.get(i)).getFemelle(),imgId ));
+            }
+            else{
+                choicesImg.add(new CardModel(animallist.get(indices.get(i)).getEnfant(),imgId ));
+            }
+        }
         CardGVAdapter adapter = new CardGVAdapter(this, choicesImg);
 
         /*String fnm = animallist.get(0).getName().toLowerCase(); //  this is image file name
@@ -60,7 +99,7 @@ public class SoundGame extends AppCompatActivity {
         choicesImg.add(new CardModel("choix1", imgId));*/
 
         choices.setAdapter(adapter);
-        displayVideo("lion");
+        displayVideo(animallist.get(idReponse).getName().toLowerCase());
     }
 
     public void displayVideo(String fnm){
@@ -85,20 +124,13 @@ public class SoundGame extends AppCompatActivity {
         this.choices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                switch (position) {
-                    case 0:
-                        Toast.makeText(SoundGame.this, "choice1", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 1:
-                        Toast.makeText(SoundGame.this, "choice2", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 2:
-                        Toast.makeText(SoundGame.this, "choice3", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 3:
-                        Toast.makeText(SoundGame.this, "choice4", Toast.LENGTH_SHORT).show();
-                        break;
+                if(indices.get(position)!=idReponse)
+                {
+                    txtFaute.setText("Mauvaise reponse, reessayez!");
+                }
+                else{
+                    setData();
+                    txtFaute.setText("Bien joue");
                 }
             }
         });
