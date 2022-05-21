@@ -120,3 +120,13 @@ app.post('/ajoutFavoris', function(req, res){
     res.send(new reponse(400,error,null))
   })
 });
+app.get('/findQuizz',function(req,res){
+  var fonc=new func();
+  fonc.findQuizz().then(function(results){
+  var toRespond =new reponse(200,"Data gotten successfully",results);
+  res.send(toRespond);
+  }).catch( function(error){
+      var toRespond =new reponse(400,error,null);
+      res.send(toRespond)
+  })
+});
