@@ -36,4 +36,9 @@ public final class ListController {
         return ListController.instance;
     }
 
+    public int[] getRandom(){
+        int[] list = new int[4];
+        return list;
+    }
+
 }

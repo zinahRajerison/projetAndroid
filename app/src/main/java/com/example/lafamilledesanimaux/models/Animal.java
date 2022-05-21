@@ -155,10 +155,10 @@ public class Animal {
         ArrayList<Animal> animal = new ArrayList<Animal>();
         Log.d("MyMessage", nom + " " + String.valueOf(iSelectedPays) + " " + String.valueOf(iSelectedCat) );
         try {
-            HashMap<String, Object> params = new HashMap<String, Object>();
+            HashMap<String, String> params = new HashMap<String, String>();
             params.put("name", nom);
-            params.put("id_categorie", iSelectedCat);
-            params.put("id_pays", iSelectedPays);
+            params.put("id_categorie", String.valueOf(iSelectedCat));
+            params.put("id_pays", String.valueOf(iSelectedPays));
             RequestParams reqparams = new RequestParams(params);
             AsyncHttpClient client = new AsyncHttpClient();
             String findURL = "http://192.168.1.134:3000/findAnimal";
