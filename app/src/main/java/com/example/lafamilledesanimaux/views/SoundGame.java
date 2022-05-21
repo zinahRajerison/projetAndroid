@@ -47,7 +47,6 @@ public class SoundGame extends AppCompatActivity {
         controlAnimal.getInstance();
         animallist = controlAnimal.animalList;
         txtQuestion=(TextView) findViewById(R.id.txtQuest);
-        indices=new ArrayList<Integer>();
         setData();
         listener();
     }
@@ -61,6 +60,7 @@ public class SoundGame extends AppCompatActivity {
         return ret;
     }
     private void setData(){
+        indices=new ArrayList<Integer>();
         int randomfamille=new Random().nextInt(2);
         if(randomfamille==0){
             txtQuestion.setText("Quel est le nom de la femelle de l'animal qui porte ce cri?");
