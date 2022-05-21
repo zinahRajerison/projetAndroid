@@ -19,8 +19,9 @@ import cz.msebera.android.httpclient.Header;
 public class Animal {
 
     int id;
-    String img;
     String name;
+    String femelle;
+    String enfant;
 
     public Animal(){}
 
@@ -29,28 +30,15 @@ public class Animal {
         this.name = name;
     }
 
-    public Animal(String img, String name) {
-        this.id = 0;
-        this.img = img;
+    public Animal(int id, String name, String femelle, String enfant) {
+        this.id = id;
         this.name = name;
-    }
-
-    public Animal(int i, String img, String name) {
-        this.id = i;
-        this.img = img;
-        this.name = name;
+        this.femelle = femelle;
+        this.enfant = enfant;
     }
 
     public int getId(){
         return id;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
     }
 
     public String getName() {
@@ -59,6 +47,22 @@ public class Animal {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getFemelle() {
+        return femelle;
+    }
+
+    public void setFemelle(String femelle) {
+        this.femelle = femelle;
+    }
+
+    public String getEnfant() {
+        return enfant;
+    }
+
+    public void setEnfant(String enfant) {
+        this.enfant = enfant;
     }
 
     public ArrayList<Animal> getList(){
@@ -90,48 +94,9 @@ public class Animal {
                         Animal temp = new Animal();
                         for (int i = 0; i < first.length(); i++) {
                             JSONObject row = first.getJSONObject(i);
-                            temp = new Animal(row.getInt("_id"), row.getString("nom_animal"));
+                            temp = new Animal(row.getInt("_id"), row.getString("nom_animal"), row.getString("femelle"), row.getString("enfant"));
                             animal.add(temp);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Log.d("findAllAnimals", e.toString());
-                    }
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-                }
-            });
-            // Log.d("findAllAnimals", "changes");
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return animal;
-    }
-
-    public ArrayList<Animal> getListByCriteria(String input, String criteria){
-        ArrayList<Animal> animal = new ArrayList<Animal>();
-        try {
-            AsyncHttpClient client = new AsyncHttpClient();
-            final byte[][] response = new byte[1][1];
-            String signupURL = "http://enfant-explorateur.herokuapp.com/findAnimal";
-            client.get(signupURL, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    response[0] = responseBody;
-                    //Log.d("findAllAnimals", new String(responseBody));
-                    try {
-                        JSONObject obj = new JSONObject(new String(response[0]));
-                        JSONArray first = obj.getJSONArray("data");
-                        Log.d("findAllAnimals", first.toString() );
-                        Animal temp = new Animal();
-                        for (int i = 0; i < first.length(); i++) {
-                            JSONObject row = first.getJSONObject(i);
-                            temp = new Animal(row.getInt("_id"), row.getString("nom_animal"));
-                            animal.add(temp);
-                            // Log.d("findAllAnimals", "haha" + animal.get(i).getName());
+                            Log.d("findAllAnimals", temp.getFemelle() );
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -161,7 +126,7 @@ public class Animal {
             params.put("id_pays", String.valueOf(iSelectedPays));
             RequestParams reqparams = new RequestParams(params);
             AsyncHttpClient client = new AsyncHttpClient();
-            String findURL = "http://192.168.1.134:3000/findAnimal";
+            String findURL = "http://enfant-explorateur.herokuapp.com/findAnimal";
             client.post(findURL, reqparams, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
