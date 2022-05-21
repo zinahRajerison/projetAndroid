@@ -1,6 +1,7 @@
 package com.example.lafamilledesanimaux.views;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,14 +84,15 @@ public class ListAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        // valorisation du contenu du holder (de la ligne)
         holder.textView4.setText(animal.get(i).getName().toString());
-        // int imageResource = this.context.getResources().getIdentifier(animal.get(i).getImg(), "drawable", context.getPackageName());
-        // Drawable res = this.context.getResources().getDrawable(imageResource);
-        // holder.imageView2.setImageDrawable(res);
-        // holder.imageView2.setImageResource(imageResource);
-        holder.textView4.setTag(i);
 
+        String fnm = animal.get(i).getName().toLowerCase(); //  this is image file name
+        String PACKAGE_NAME = context.getPackageName();
+        int imgId = context.getResources().getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
+        holder.imageView2.setImageBitmap(BitmapFactory.decodeResource(context.getResources(),imgId));
+        // displayVideo(fnm);
+
+        holder.textView4.setTag(i);
         holder.textView4.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

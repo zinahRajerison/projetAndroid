@@ -24,10 +24,16 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:text="Nom" />
 
             <Spinner
                 android:id="@+id/spinner2"
+                android:layout_width="1dp"
+                android:layout_height="46dp"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/spinner"
                 android:layout_width="1dp"
                 android:layout_height="46dp"
                 android:layout_weight="1" />

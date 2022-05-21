@@ -49,7 +49,7 @@ public class Menu extends AppCompatActivity {
                         break;
                     case 1:
                         Toast.makeText(Menu.this, "game", Toast.LENGTH_SHORT).show();
-                        Intent intent1=new Intent(Menu.this,Fiche.class);
+                        Intent intent1=new Intent(Menu.this,SoundGame.class);
                         startActivity(intent1);
                         break;
                     case 2:

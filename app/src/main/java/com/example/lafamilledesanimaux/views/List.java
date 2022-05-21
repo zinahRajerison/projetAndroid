@@ -3,9 +3,7 @@ package com.example.lafamilledesanimaux.views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -16,11 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.lafamilledesanimaux.R;
-import com.example.lafamilledesanimaux.controllers.AnimalController;
+import com.example.lafamilledesanimaux.controllers.ListController;
 import com.example.lafamilledesanimaux.models.Animal;
+import com.example.lafamilledesanimaux.models.Categorie;
+import com.example.lafamilledesanimaux.models.Pays;
 
 import java.util.ArrayList;
 
@@ -29,10 +28,15 @@ public class List extends AppCompatActivity {
     // properties
     private EditText editTextName;
     private Spinner spinner;
-    String[] bankNames={"nom","pays","categorie"};
-    private int iSelected = 0;
+    private Spinner spinner2;
+    private int iSelectedPays = 0;
+    private int iSelectedCat = 0;
     ArrayList<Animal> animallist;
-    private AnimalController controlAnimal;
+    ArrayList<Pays> payslist;
+    int[] iPays;
+    ArrayList<Categorie> categorielist;
+    int[] iCategorie;
+    private ListController controlAnimal;
     private static int splash_time_out = 5000;
 
     @Override
@@ -40,15 +44,24 @@ public class List extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         final ProgressDialog progressDialog = new ProgressDialog(List.this);
         progressDialog.setCancelable(false); // set cancelable to false
-        progressDialog.setMessage("Chargement"); // set message
+        progressDialog.setMessage("A la découverte des animaux"); // set message
         progressDialog.show();
+        controlAnimal.getInstance();
+        animallist = controlAnimal.animalList;
+        payslist = controlAnimal.paysList;
+        categorielist = controlAnimal.categoryList;
+        /*try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
         new Handler().postDelayed(new Runnable(){
 
             @Override
             public void run(){
                 setContentView(R.layout.activity_list);
-                controlAnimal.getInstance();
-                animallist = controlAnimal.animalList;
+                /*controlAnimal.getInstance();
+                animallist = controlAnimal.animalList;*/
                 init();
                 createList();
                 progressDialog.dismiss();
@@ -62,14 +75,38 @@ public class List extends AppCompatActivity {
         createList();*/
     }
 
+    private String[] getBankNamePays(){
+        String[] bankNames = new String[payslist.size()];
+        iPays = new int[payslist.size()];
+        for(int i=0; i<payslist.size(); i++){
+            iPays[i] = payslist.get(i).getId_pays();
+            bankNames[i] = payslist.get(i).getNom_pays();
+        }
+        return bankNames;
+    }
+
+    private String[] getBankNameCategory(){
+        String[] bankNames = new String[categorielist.size()];
+        iCategorie = new int[categorielist.size()];
+        for(int i=0; i<categorielist.size(); i++){
+            iCategorie[i] = categorielist.get(i).getId_categorie();
+            bankNames[i] = categorielist.get(i).getNom_categorie();
+        }
+        return bankNames;
+    }
+
     private void init(){
         editTextName = (EditText)findViewById(R.id.editTextName);
-        spinner = (Spinner) findViewById(R.id.spinner2);
-        //Creating the ArrayAdapter instance having the bank name list
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, bankNames);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        String[] bankNamePays = getBankNamePays();
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, bankNamePays);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Setting the ArrayAdapter data on the Spinner
         spinner.setAdapter(aa);
+        String[] bankNameCategorie = getBankNameCategory();
+        ArrayAdapter aa2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, bankNameCategorie);
+        aa2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(aa2);
         listener();
     }
 
@@ -91,9 +128,22 @@ public class List extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), bankNames[i], Toast.LENGTH_LONG).show();
-                iSelected = i;
-                Log.d("liste",bankNames[i]);
+                // Toast.makeText(getApplicationContext(), bankNames[i], Toast.LENGTH_LONG).show();
+                iSelectedPays = iPays[i];
+                // Log.d("liste",bankNames[i]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                // Toast.makeText(getApplicationContext(), bankNames[i], Toast.LENGTH_LONG).show();
+                iSelectedCat = iCategorie[i];
+                // Log.d("liste",bankNames[i]);
             }
 
             @Override
@@ -103,19 +153,22 @@ public class List extends AppCompatActivity {
         });
         ((Button) findViewById(R.id.button)).setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                String name = editTextName.getText().toString();
-                String criteria = bankNames[iSelected];
-                Toast.makeText(getApplicationContext(), name + " " + criteria, Toast.LENGTH_LONG).show();
-                animallist = new Animal().getListByCriteria(name, criteria);
+                String nom = editTextName.getText().toString();
+                // Toast.makeText(getApplicationContext(), name + " " + criteria, Toast.LENGTH_LONG).show();
+                animallist = new Animal().getListByCriteria(nom, iSelectedPays, iSelectedCat);
                 createList();
             }
         });
     }
 
-    public void setIndice(int position) {
+    /**
+     * envoi de l'indice de l'animal cliqué
+     * @param id
+     */
+    public void setIndice(int id) {
         Intent homeIntent = new Intent(List.this, Fiche.class);
-        Log.d("findAllAnimals", String.valueOf(position));
-        homeIntent.putExtra("idanimal", position);
+        homeIntent.putExtra("idanimal", id);
+        Log.d("findAllAnimals", String.valueOf(homeIntent.getIntExtra("idanimal", 0)));
         startActivity(homeIntent);
         finish();
     }

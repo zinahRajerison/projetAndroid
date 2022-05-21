@@ -1,7 +1,19 @@
 package com.example.lafamilledesanimaux.models;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 public class Categorie {
     @SerializedName("_id")
@@ -24,6 +36,14 @@ public class Categorie {
     }
 
     public void setNom_categorie(String nom_categorie) {
+        this.nom_categorie = nom_categorie;
+    }
+
+    public Categorie() {
+    }
+
+    public Categorie(int id_categorie, String nom_categorie) {
+        this.id_categorie = id_categorie;
         this.nom_categorie = nom_categorie;
     }
 }

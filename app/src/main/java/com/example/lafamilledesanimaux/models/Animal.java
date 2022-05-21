@@ -63,7 +63,7 @@ public class Animal {
 
     public ArrayList<Animal> getList(){
         ArrayList<Animal> animal = new ArrayList<Animal>();
-        Animal temp;
+        /*Animal temp;
         String name = "";
         String path = "";
         for(int i=0; i<25; i++){
@@ -72,10 +72,10 @@ public class Animal {
             temp = new Animal(i, path, name);
             animal.add(temp);
         }
-        return animal;
+        return animal;*/
 
 
-        /*try {
+        try {
             AsyncHttpClient client = new AsyncHttpClient();
             final byte[][] response = new byte[1][1];
             String signupURL = "http://enfant-explorateur.herokuapp.com/findAll";
@@ -108,7 +108,7 @@ public class Animal {
         }catch(Exception e){
             e.printStackTrace();
         }
-        return animal;*/
+        return animal;
     }
 
     public ArrayList<Animal> getListByCriteria(String input, String criteria){
@@ -145,6 +145,47 @@ public class Animal {
                 }
             });
             // Log.d("findAllAnimals", "changes");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return animal;
+    }
+
+    public ArrayList<Animal> getListByCriteria(String nom, int iSelectedPays, int iSelectedCat) {
+        ArrayList<Animal> animal = new ArrayList<Animal>();
+        Log.d("MyMessage", nom + " " + String.valueOf(iSelectedPays) + " " + String.valueOf(iSelectedCat) );
+        try {
+            HashMap<String, Object> params = new HashMap<String, Object>();
+            params.put("name", nom);
+            params.put("id_categorie", iSelectedCat);
+            params.put("id_pays", iSelectedPays);
+            RequestParams reqparams = new RequestParams(params);
+            AsyncHttpClient client = new AsyncHttpClient();
+            String findURL = "http://192.168.1.134:3000/findAnimal";
+            client.post(findURL, reqparams, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    try {
+                        JSONObject obj = new JSONObject(new String(responseBody));
+                        JSONArray first = obj.getJSONArray("data");
+                        Log.d("MyMessage", first.toString() );
+                        Animal temp = new Animal();
+                        for (int i = 0; i < first.length(); i++) {
+                            JSONObject row = first.getJSONObject(i);
+                            temp = new Animal(row.getInt("_id"), row.getString("nom_animal"));
+                            animal.add(temp);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Log.d("findAllAnimals", e.toString());
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                }
+            });
         }catch(Exception e){
             e.printStackTrace();
         }

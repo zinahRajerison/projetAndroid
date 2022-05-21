@@ -8,11 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.lafamilledesanimaux.R;
-import com.example.lafamilledesanimaux.controllers.AnimalController;
+import com.example.lafamilledesanimaux.controllers.ListController;
 import com.example.lafamilledesanimaux.controllers.UserController;
 import com.example.lafamilledesanimaux.models.User;
 
@@ -30,7 +29,7 @@ public class SignUp extends AppCompatActivity {
     private EditText txtPwd;
     private EditText txtConfirmation;
     private UserController control;
-    private AnimalController controlAnimal;
+    private ListController controlAnimal;
 
     /**
      * Initilisation des liens avec les objets graphiques
