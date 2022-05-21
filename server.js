@@ -105,7 +105,7 @@ app.get('/getFavoris/:id',function(req,res){
   })
 });
 app.post('/findById',function(req,res){
-  new func().findById(req.body.id).then(function(results){
+  new func().findById(req.body.id, req.body.iduser).then(function(results){
   var toRespond = new reponse(200,"Data gotten successfully",results);
   res.send(toRespond);
   }).catch( function(error){

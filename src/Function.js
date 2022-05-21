@@ -91,7 +91,7 @@ class Function{
         })
     }
 
-    findById =function(id){
+    findById =function(id, id_user){
         return new Promise(function(resolve,reject){
             new helper().seConnecter().then(function(db){
                 console.log(db);
@@ -107,11 +107,27 @@ class Function{
                 // db.collection('animal').findOne(query)
                 .then(result => {
                     console.log(result)
+                    console.log(result[0].nom_animal);
                     if(result==null){
                         reject("pas d'animal");
                     }
                     else{
-                        resolve(result[0])
+                        db.collection('favoris').aggregate([
+                            { $match: { 'id_animal' : (parseInt(id)), 'id_user' : (parseInt(id_user)) } }
+                        ]).toArray()
+                        .then(result1 => {
+                            console.log(result1)
+                            if(result1[0]==null){
+                                result[0].favoris = 0;
+                                resolve(result[0])
+                            }
+                            else{
+                                result[0].favoris = result1[0]._id;
+                                resolve(result[0])
+                            }
+                        })
+                        .catch(error => console.error(error))
+                        // resolve(result[0])
                     }
                 })
                 .catch(error => console.error(error))
