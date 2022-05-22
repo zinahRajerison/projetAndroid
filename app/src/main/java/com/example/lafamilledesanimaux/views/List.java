@@ -19,6 +19,7 @@ import com.example.lafamilledesanimaux.R;
 import com.example.lafamilledesanimaux.controllers.ListController;
 import com.example.lafamilledesanimaux.models.Animal;
 import com.example.lafamilledesanimaux.models.Categorie;
+import com.example.lafamilledesanimaux.models.ListModel;
 import com.example.lafamilledesanimaux.models.Pays;
 
 import java.util.ArrayList;
@@ -48,10 +49,14 @@ public class List extends AppCompatActivity {
         progressDialog.show();
         controlAnimal.getInstance();
         animallist = controlAnimal.animalList;
+        if(getIntent().getStringExtra("iduser")!=null){
+            Log.d("findAllAnimals", "hhhhhhhey" + getIntent().getStringExtra("iduser") );
+            int id = Integer.parseInt(getIntent().getStringExtra("iduser"));
+            animallist = new ListModel().getFavorites(id);
+        }
         payslist = controlAnimal.paysList;
         categorielist = controlAnimal.categoryList;
         new Handler().postDelayed(new Runnable(){
-
             @Override
             public void run(){
                 setContentView(R.layout.activity_list);
@@ -62,12 +67,6 @@ public class List extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         }, splash_time_out);
-
-        /*setContentView(R.layout.activity_list);
-        controlAnimal.getInstance();
-        animallist = controlAnimal.animalList;
-        init();
-        createList();*/
     }
 
     private String[] getBankNamePays(){
