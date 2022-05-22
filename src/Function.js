@@ -6,8 +6,8 @@ class Function{
         return new Promise(function(resolve,reject){
             new helper().seConnecter().then(function(db){
                 console.log(db);
-                // var nvmdp=sha256(mdp)
-                var query = {"nom_user":name,"mdp_user":mdp}
+                var nvmdp=sha256(mdp);
+                var query = {"nom_user":name,"mdp_user":nvmdp};
                 console.log(query)
                 db.collection('User').findOne(query)
                 .then(result => {
@@ -77,9 +77,9 @@ class Function{
         return new Promise(function(resolve,reject){
             new helper().seConnecter().then(function(db){
                 console.log(db);
-                // var nvmdp=sha256(mdp)
+                var nvmdp=sha256(mdp)
                 db.collection('User').find().limit(1).sort({$natural:-1}).toArray().then(result => {
-                    var query = {"_id":result[0]._id + 1,"nom_user":name,"mdp_user":mdp}
+                    var query = {"_id":result[0]._id + 1,"nom_user":name,"mdp_user":nvmdp}
                     console.log(query)
                     db.collection('User').insertOne(query)
                     .then(result => {
