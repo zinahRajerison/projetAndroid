@@ -69,10 +69,24 @@ public class PreferenceActivity extends AppCompatActivity {
                 finish();
             }
         });
+        /**
+         * Deconnexion
+         */
         deconnexionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // do something
+                try{
+                    SharedPreferences sharedPreferences = getSharedPreferences("userToken",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    Intent i = new Intent(getApplicationContext(), Login.class);
+                    startActivity(i);
+                    Log.d("message", "link");
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
     }

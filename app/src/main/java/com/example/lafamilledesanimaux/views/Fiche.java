@@ -108,8 +108,8 @@ public class Fiche extends AppCompatActivity {
 //                                 progressDialog.dismiss(); //dismiss progress dialog
                                     if(response.body()!= null) {
                                         Log.d("status",String.valueOf(response.body().getStatus()));
-//                                        Intent intent=new Intent(Fiche.this,Fiche.class);
-//                                        startActivity(intent);
+                                        finish();
+                                        startActivity(getIntent());
                                     }else {
                                         Toast.makeText(Fiche.this, "non insere", Toast.LENGTH_SHORT).show();
                                     }

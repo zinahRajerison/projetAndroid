@@ -13,38 +13,66 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="674dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imgAnimal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center|center_horizontal|center_vertical"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/img12" />
+                android:gravity="center|center_horizontal|center_vertical"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtNameAnimal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/imgAnimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal|center_vertical"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/img12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center|center_horizontal|center_vertical"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:gravity="center|center_horizontal|center_vertical"
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imgFavoris"
-                android:layout_width="0dp"
-                android:layout_height="54dp"
+                <TextView
+                    android:id="@+id/txtNameAnimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal|center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center|center_horizontal|center_vertical"
+                    android:text="TextView"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|center_horizontal|center_vertical"
                 android:layout_weight="1"
-                android:maxWidth="20dp"
-                app:srcCompat="@drawable/favoris" />
+                android:gravity="center|center_horizontal|center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgFavoris"
+                    android:layout_width="61dp"
+                    android:layout_height="46dp"
+                    app:srcCompat="@drawable/favoris" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="648dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -55,7 +83,8 @@
                 android:layout_gravity="center|center_horizontal|center_vertical"
                 android:layout_weight="1"
                 android:gravity="center|center_horizontal|center_vertical"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtPays"
@@ -64,7 +93,8 @@
                 android:layout_gravity="center|center_horizontal|center_vertical"
                 android:layout_weight="1"
                 android:gravity="center|center_horizontal|center_vertical"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtFemelle"
@@ -73,7 +103,8 @@
                 android:layout_gravity="center|center_horizontal|center_vertical"
                 android:layout_weight="1"
                 android:gravity="center|center_horizontal|center_vertical"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtEnfant"
@@ -82,7 +113,8 @@
                 android:layout_gravity="center|center_horizontal|center_vertical"
                 android:layout_weight="1"
                 android:gravity="center|center_horizontal|center_vertical"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -98,11 +130,6 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="67dp"
-                    android:layout_weight="1" />
-
                 <VideoView
                     android:id="@+id/criAnimal"
                     android:layout_width="wrap_content"
@@ -113,24 +140,25 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="78dp"
+                android:layout_height="153dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btnStop"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="Stop" />
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPlay"
                     android:layout_width="match_parent"
-                    android:layout_height="78dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Play" />
+
+                <Button
+                    android:id="@+id/btnStop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Stop" />
             </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
