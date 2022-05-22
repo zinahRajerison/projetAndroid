@@ -41,5 +41,5 @@ public interface UserService {
      * @return
      */
     @POST("/ajoutFavoris")
-    public Call<LoginResponse> ajoutFavoris(@Body Favoris fav);
+    public Call<FavoriteResponse> ajoutFavoris(@Body Favoris fav);
 }
