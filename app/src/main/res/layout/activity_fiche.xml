@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|center_horizontal|center_vertical"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/img12" />
+                    app:srcCompat="@drawable/noir" />
             </LinearLayout>
 
             <LinearLayout
