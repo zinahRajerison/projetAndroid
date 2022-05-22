@@ -108,6 +108,7 @@ public class Login extends AppCompatActivity {
                                  Log.d("error",t.getStackTrace().toString());
                                  Toast.makeText(Login.this, t.getMessage(), Toast.LENGTH_LONG).show();
                                  progressDialog.dismiss(); //dismiss progress dialog
+                                 Toast.makeText(Login.this, "Login ou mots de passe incorrecte", Toast.LENGTH_SHORT).show();
                              }
                         });
                     }

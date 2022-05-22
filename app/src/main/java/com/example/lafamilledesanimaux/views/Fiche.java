@@ -53,7 +53,7 @@ public class Fiche extends AppCompatActivity {
     private int idAnimal;
     private int idUser;
     private AnimalFiche animal;
-    private static int splash_time_out = 5000;
+    private static int splash_time_out = 6000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +66,6 @@ public class Fiche extends AppCompatActivity {
             @Override
             public void run(){
                 setContentView(R.layout.activity_fiche);
-                /*controlAnimal.getInstance();
-                animallist = controlAnimal.animalList;*/
                 init();
                 progressDialog.dismiss();
             }
