@@ -62,11 +62,10 @@ public class Fiche extends AppCompatActivity {
         progressDialog.setMessage("Chargement..."); // set message
         progressDialog.show();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fiche);
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run(){
-                setContentView(R.layout.activity_list);
+                setContentView(R.layout.activity_fiche);
                 /*controlAnimal.getInstance();
                 animallist = controlAnimal.animalList;*/
                 init();
