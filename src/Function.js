@@ -55,10 +55,14 @@ class Function{
         })
         
     }
-    getFavoris =function(table){
+    getFavoris =function(id){
         return new Promise(function(resolve,reject){
             new helper().seConnecter().then(function(db){
-                db.collection(table).find().toArray()
+                db.collection('animal').aggregate([
+                    { $lookup: { from: 'favoris', localField: '_id', foreignField: 'id_animal', as: 'favorisdetails' } },
+                    { $unwind: "$favorisdetails" },
+                    { $match: { 'favorisdetails.id_user' : (parseInt(id)) } }
+                ]).toArray()
                 .then(results => {
                     resolve(results);
                 })
