@@ -57,19 +57,19 @@ public class Fiche extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final ProgressDialog progressDialog = new ProgressDialog(Fiche.this);
-        progressDialog.setCancelable(false); // set cancelable to false
-        progressDialog.setMessage("Chargement..."); // set message
-        progressDialog.show();
+//        final ProgressDialog progressDialog = new ProgressDialog(Fiche.this);
+//        progressDialog.setCancelable(false); // set cancelable to false
+//        progressDialog.setMessage("Chargement..."); // set message
+//        progressDialog.show();
         super.onCreate(savedInstanceState);
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run(){
+//        new Handler().postDelayed(new Runnable(){
+//            @Override
+//            public void run(){
                 setContentView(R.layout.activity_fiche);
                 init();
-                progressDialog.dismiss();
-            }
-        }, splash_time_out);
+//                progressDialog.dismiss();
+//            }
+//        }, splash_time_out);
     }
     private void init() {
         btnStop = (Button) findViewById(R.id.btnStop);
