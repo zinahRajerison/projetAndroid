@@ -29,6 +29,9 @@ public class AnimalFiche {
     @SerializedName("pays")
     @Expose
     private Pays pays;
+    @SerializedName("favoris")
+    @Expose
+    private int favoris;
 
     public Integer getId() {
         return id;
@@ -92,5 +95,13 @@ public class AnimalFiche {
 
     public void setPays(Pays pays) {
         this.pays = pays;
+    }
+
+    public int getFavoris() {
+        return favoris;
+    }
+
+    public void setFavoris(int favoris) {
+        this.favoris = favoris;
     }
 }

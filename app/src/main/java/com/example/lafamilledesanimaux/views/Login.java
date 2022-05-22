@@ -56,6 +56,9 @@ public class Login extends AppCompatActivity {
      * ecoute des evenements de login
      */
     private void submitListener(){
+        /**
+         * listener pour redirection vers inscription
+         */
         ((TextView) findViewById(R.id.lblLink)).setOnClickListener(new TextView.OnClickListener(){
             public void onClick(View v){
 //                Toast.makeText(MainActivity.this,"test",Toast.LENGTH_SHORT).show();
@@ -70,6 +73,9 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+        /**
+         * listener bouton login
+         */
         ((Button) findViewById(R.id.btnLogin)).setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v){
                 final ProgressDialog progressDialog = new ProgressDialog(Login.this);
@@ -109,7 +115,7 @@ public class Login extends AppCompatActivity {
     }
 
     /**
-     * Fonction save preference
+     * Fonction stockage session
      */
     public void insertSession(UserResponse user)  {
         SharedPreferences sharedPreferences= this.getSharedPreferences("userToken", Context.MODE_PRIVATE);

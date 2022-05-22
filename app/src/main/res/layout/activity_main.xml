@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="cursive"
                 android:gravity="center"
-                android:text="Animal Descovery"
+                android:text="Animal Discovery"
                 android:textColor="#185985"
                 android:textSize="40sp" />
         </LinearLayout>
