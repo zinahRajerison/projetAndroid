@@ -78,8 +78,10 @@
                     android:id="@+id/txtPwd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_vertical"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:gravity="center|center_horizontal|center_vertical"
                     android:inputType="textPassword" />
 
             </LinearLayout>

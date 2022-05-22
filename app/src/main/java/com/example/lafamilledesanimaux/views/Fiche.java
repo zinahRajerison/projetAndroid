@@ -12,6 +12,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -52,12 +53,26 @@ public class Fiche extends AppCompatActivity {
     private int idAnimal;
     private int idUser;
     private AnimalFiche animal;
+    private static int splash_time_out = 5000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final ProgressDialog progressDialog = new ProgressDialog(Fiche.this);
+        progressDialog.setCancelable(false); // set cancelable to false
+        progressDialog.setMessage("Chargement..."); // set message
+        progressDialog.show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fiche);
-        init();
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                setContentView(R.layout.activity_list);
+                /*controlAnimal.getInstance();
+                animallist = controlAnimal.animalList;*/
+                init();
+                progressDialog.dismiss();
+            }
+        }, splash_time_out);
     }
     private void init() {
         btnStop = (Button) findViewById(R.id.btnStop);
