@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.lafamilledesanimaux.R;
 import com.example.lafamilledesanimaux.controllers.ListController;
 import com.example.lafamilledesanimaux.controllers.UserController;
+import com.example.lafamilledesanimaux.models.NotificationReceiver;
 import com.example.lafamilledesanimaux.models.User;
 
 public class SignUp extends AppCompatActivity {
@@ -58,7 +59,11 @@ public class SignUp extends AppCompatActivity {
                     Log.d("profil", name);
                     User userprofil = new User(name, pwd);
                     userprofil.signup();
+                    Toast.makeText(SignUp.this, "Maintenant connecte toi pour partir à l'aventure!", Toast.LENGTH_SHORT).show();
                     Intent homeIntent = new Intent(SignUp.this, Login.class);
+                    NotificationReceiver notif = new NotificationReceiver();
+                    String text = "Bienvenue dans le royaume des animaux " + name + ", connecte toi pour partir à l'aventure avec nous";
+                    notif.showNotification(SignUp.this, "Enfant explorateur", text, homeIntent);
                     startActivity(homeIntent);
                     finish();
                 }else{
