@@ -40,6 +40,9 @@ public class SoundGame extends AppCompatActivity {
         init();
     }
 
+    /**
+     * initialisation de la page
+     */
     private void init(){
         choices = (GridView) findViewById(R.id.choices);
         video = (VideoView) findViewById(R.id.videoView);
@@ -50,6 +53,12 @@ public class SoundGame extends AppCompatActivity {
         setData();
         listener();
     }
+
+    /**
+     * teste si l'animal est deja dans le jeu
+     * @param atester
+     * @return
+     */
     private boolean testerAppartenance(int atester){
         boolean ret= false;
         for(int i=0;i<indices.size();i++){
@@ -59,6 +68,10 @@ public class SoundGame extends AppCompatActivity {
         }
         return ret;
     }
+
+    /**
+     * affichage des donnees dans le jeu
+     */
     private void setData(){
         indices=new ArrayList<Integer>();
         int randomfamille=new Random().nextInt(2);
@@ -100,13 +113,23 @@ public class SoundGame extends AppCompatActivity {
         displayVideo(animallist.get(idReponse).getName().toLowerCase());
     }
 
+    /**
+     * affichage de la video
+     * @param fnm
+     */
     public void displayVideo(String fnm){
         getResources().getIdentifier("FILENAME_WITHOUT_EXTENSION", "raw", getPackageName());
         String path = "android.resource://" + getPackageName() + "/" + "raw/"+fnm;
         video.setVideoURI(Uri.parse(path));
     }
 
+    /**
+     * ecoute des evenements
+     */
     private void listener() {
+        /**
+         * liste de la video
+         */
         this.video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,6 +142,9 @@ public class SoundGame extends AppCompatActivity {
                 }
             }
         });
+        /**
+         * listener des choix
+         */
         this.choices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

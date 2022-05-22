@@ -22,6 +22,7 @@ import android.widget.VideoView;
 
 import com.example.lafamilledesanimaux.R;
 import com.example.lafamilledesanimaux.models.AnimalFiche;
+import com.example.lafamilledesanimaux.models.Favoris;
 import com.example.lafamilledesanimaux.models.FicheResponse;
 import com.example.lafamilledesanimaux.models.Id;
 import com.example.lafamilledesanimaux.models.LoginResponse;
@@ -44,6 +45,7 @@ public class Fiche extends AppCompatActivity {
     private TextView txtFemelle;
     private TextView txtEnfant;
     private ImageView imgAnimal;
+    private ImageView imgFavoris;
     private int idAnimal;
 
     @Override
@@ -61,6 +63,7 @@ public class Fiche extends AppCompatActivity {
         txtFemelle=(TextView) findViewById(R.id.txtFemelle);
         txtEnfant=(TextView) findViewById(R.id.txtEnfant);
         imgAnimal=(ImageView) findViewById(R.id.imgAnimal);
+        imgFavoris=(ImageView) findViewById(R.id.imgFavoris);
         view = (VideoView)findViewById(R.id.criAnimal);
         submitListener();
         idAnimal = getIntent().getIntExtra("idanimal",0);
@@ -80,7 +83,44 @@ public class Fiche extends AppCompatActivity {
                 view.stopPlayback();
             }
         });
+        ((ImageView) findViewById(R.id.imgFavoris)).setOnClickListener(new ImageView.OnClickListener(){
+            public void onClick(View v){
+                if(getIntent().getStringExtra("iduser")!=null){
+                    Log.d("ajoutFavoris", "hhhhhhhey" + getIntent().getStringExtra("iduser") );
+                    int idUser = Integer.parseInt(getIntent().getStringExtra("iduser"));
+                    Favoris fav= new Favoris(idAnimal,idUser);
+                    UserService userservice = RetrofitClientInstance.getRetrofitInstance().create(UserService.class);
+                    userservice.ajoutFavoris(fav).enqueue(
+                            new Callback<LoginResponse>() {
+                                @Override
+                                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+//                                 progressDialog.dismiss(); //dismiss progress dialog
+                                    if(response.body()!= null) {
+                                        Log.d("status",String.valueOf(response.body().getStatus()));
+                                        Intent intent=new Intent(Fiche.this,Fiche.class);
+                                        startActivity(intent);
+                                    }else {
+                                        Toast.makeText(Fiche.this, "non insere", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                                    // if error occurs in network transaction then we can get the error in this method.
+                                    t.printStackTrace();
+                                    Log.d("error",t.getStackTrace().toString());
+                                    Toast.makeText(Fiche.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+                }
+            }
+        });
     }
+
+    /**
+     * affichage de la video
+     * @param fnm
+     */
     public void displayVideo(String fnm){
         getResources().getIdentifier("FILENAME_WITHOUT_EXTENSION",
                 "raw", getPackageName());
@@ -88,6 +128,9 @@ public class Fiche extends AppCompatActivity {
         view.setVideoURI(Uri.parse(path));
     }
 
+    /**
+     * instanciation des donnees a afficher dans la fiche
+     */
     public void setDataFiche(){
         final ProgressDialog progressDialog = new ProgressDialog(Fiche.this);
         progressDialog.setCancelable(false); // set cancelable to false
