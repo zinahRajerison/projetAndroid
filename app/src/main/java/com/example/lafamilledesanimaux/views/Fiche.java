@@ -149,7 +149,7 @@ public class Fiche extends AppCompatActivity {
         progressDialog.setMessage("Chargement"); // set message
         Log.d("idAnimal:",String.valueOf(this.idAnimal));
         UserService userservice = RetrofitClientInstance.getRetrofitInstance().create(UserService.class);
-        userservice.findById(new Id(this.idAnimal)).enqueue(
+        userservice.findById(new Id(this.idAnimal,this.idUser)).enqueue(
                 new Callback<FicheResponse>() {
                     @Override
                     public void onResponse(Call<FicheResponse> call, Response<FicheResponse> response) {
