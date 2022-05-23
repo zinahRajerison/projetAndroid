@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:textAlignment="gravity"
     tools:context=".views.Fiche">
 
     <LinearLayout
@@ -79,7 +80,8 @@
                 android:id="@+id/webview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="center" />
+                android:layout_gravity="center|center_horizontal|center_vertical"
+                android:textAlignment="gravity" />
         </LinearLayout>
 
 
@@ -125,7 +127,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
 
 
     </LinearLayout>
