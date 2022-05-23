@@ -44,7 +44,7 @@
                     android:clickable="true"
                     android:gravity="center_vertical"
                     android:text="Favoris"
-                    android:textColor="#000000"
+                    android:textColor="#4E4D4D"
                     android:textScaleX="2" />
 
                 <TextView
@@ -54,7 +54,7 @@
                     android:clickable="true"
                     android:gravity="center_vertical"
                     android:text="Deconnexion"
-                    android:textColor="#000000"
+                    android:textColor="#4E4D4D"
                     android:textScaleX="2" />
             </LinearLayout>
         </LinearLayout>
