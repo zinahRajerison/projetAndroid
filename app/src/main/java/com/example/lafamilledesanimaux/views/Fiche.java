@@ -15,6 +15,9 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,6 +56,7 @@ public class Fiche extends AppCompatActivity {
     private int idAnimal;
     private int idUser;
     private AnimalFiche animal;
+    private WebView webview;
     private static int splash_time_out = 6000;
 
     @Override
@@ -75,13 +79,14 @@ public class Fiche extends AppCompatActivity {
         btnStop = (Button) findViewById(R.id.btnStop);
         btnPlay = (Button) findViewById(R.id.btnPlay);
         txtNameAnimal=(TextView) findViewById(R.id.txtNameAnimal);
-        txtCategorie=(TextView) findViewById(R.id.txtCategorie);
+        /*txtCategorie=(TextView) findViewById(R.id.txtCategorie);
         txtPays=(TextView) findViewById(R.id.txtPays);
         txtFemelle=(TextView) findViewById(R.id.txtFemelle);
-        txtEnfant=(TextView) findViewById(R.id.txtEnfant);
+        txtEnfant=(TextView) findViewById(R.id.txtEnfant);*/
         imgAnimal=(ImageView) findViewById(R.id.imgAnimal);
         imgFavoris=(ImageView) findViewById(R.id.imgFavoris);
         view = (VideoView)findViewById(R.id.criAnimal);
+        webview = (WebView)findViewById(R.id.webview);
         submitListener();
         idAnimal = getIntent().getIntExtra("idanimal",0);
         SharedPreferences sharedPreferences= Fiche.this.getSharedPreferences("userToken", Context.MODE_PRIVATE);
@@ -152,6 +157,24 @@ public class Fiche extends AppCompatActivity {
         view.setVideoURI(Uri.parse(path));
     }
 
+    public void setWebview(AnimalFiche animal){
+        String html = "";
+        html = html + "<p><strong>De categorie </strong>" +animal.getCategorie().getNom_categorie() + "</p>";
+        html = html + "<p><strong>Pays d'origine : </strong>"+animal.getPays().getNom_pays() + "</p>";
+        html = html + "<p><strong>Femelle : </strong>"+animal.getFemelle() + "</p>";
+        html = html + "<p><strong>Enfant : </strong>"+animal.getEnfant() + "</p>";
+        webview.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url){
+                return false;
+            }
+        });
+        WebSettings webSettings = webview.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setUseWideViewPort(true);
+        webview.loadData(html, "text/html", "utf-8");
+    }
+
     /**
      * instanciation des donnees a afficher dans la fiche
      */
@@ -173,10 +196,10 @@ public class Fiche extends AppCompatActivity {
                             Log.d("status",String.valueOf(response.body().getStatus()));
                             Log.d("tafiditra",animal.getCategorie().getNom_categorie());
                             txtNameAnimal.setText(" Nom de l'animal : " +animal.getNomAnimal() );
-                            txtCategorie.setText("De categorie " +animal.getCategorie().getNom_categorie());
+                            /*txtCategorie.setText("De categorie " +animal.getCategorie().getNom_categorie());
                             txtPays.setText("Pays D'origine : "+animal.getPays().getNom_pays());
                             txtFemelle.setText("Femelle : "+animal.getFemelle());
-                            txtEnfant.setText("Enfant : "+animal.getEnfant());
+                            txtEnfant.setText("Enfant : "+animal.getEnfant());*/
 
                             String fnm = animal.getNomAnimal().toLowerCase(); //  this is image file name
                             String PACKAGE_NAME = getApplicationContext().getPackageName();
@@ -187,6 +210,7 @@ public class Fiche extends AppCompatActivity {
                             imgAnimal.setImageBitmap(BitmapFactory.decodeResource(getResources(),imgId));
                             displayVideo(fnm);
 //                           startActivity(intent);
+                            setWebview(animal);
                         }else {
                             Toast.makeText(Fiche.this, "Login ou mots de passe incorrecte", Toast.LENGTH_SHORT).show();
                         }
