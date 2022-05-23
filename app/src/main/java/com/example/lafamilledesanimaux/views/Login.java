@@ -89,7 +89,7 @@ public class Login extends AppCompatActivity {
                              @Override
                              public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 //                                 progressDialog.dismiss(); //dismiss progress dialog
-                                 if(response.body()!= null) {
+                                 if(response.body().getStatus() == 200) {
                                      UserResponse user=response.body().getData();
                                      Log.d("username",user.getName());
                                      Log.d("tafiditra",response.body().toString());
@@ -98,6 +98,7 @@ public class Login extends AppCompatActivity {
                                      startActivity(intent);
                                  }else {
                                      Toast.makeText(Login.this, "Login ou mots de passe incorrecte", Toast.LENGTH_SHORT).show();
+                                     progressDialog.dismiss(); //dismiss progress dialog
                                  }
                              }
 
