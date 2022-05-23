@@ -28,9 +28,9 @@ class Function{
     rechercherAnimal =function(arechercher){
         return new Promise(function(resolve,reject){
             new helper().seConnecter().then(function(db){
-                var query = { nom_animal: { $regex: new RegExp(arechercher.name,'i')},id_categorie: Number(arechercher.id_categorie) ,id_pays: Number(arechercher.id_pays) } 
+                var query = [{ nom_animal: { $regex: new RegExp(arechercher.name,'i')},id_categorie: Number(arechercher.id_categorie) ,id_pays: Number(arechercher.id_pays) } ]
                 console.log(query)
-                db.collection('animal').find({$or:[query]}) .toArray()
+                db.collection('animal').find({$or:query}) .toArray()
                 .then(result => {
                     resolve(result)
                 })
