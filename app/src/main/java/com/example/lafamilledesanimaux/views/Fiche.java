@@ -107,7 +107,7 @@ public class Fiche extends AppCompatActivity {
             public void onClick(View v){
                 if(animal.getFavoris()!=0)
                 {
-                    Toast.makeText(Fiche.this, "deja un favoris"+idUser, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Fiche.this, "deja un favoris", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Log.d("ajoutFavoris", "hhhhhhhey" );
@@ -119,7 +119,7 @@ public class Fiche extends AppCompatActivity {
                                 public void onResponse(Call<FavoriteResponse> call, Response<FavoriteResponse> response) {
 //                                 progressDialog.dismiss(); //dismiss progress dialog
                                     if(response.body()!= null) {
-                                        Log.d("status",String.valueOf(response.body().getStatus()));
+                                        Toast.makeText(Fiche.this, "ajoute aux favoris", Toast.LENGTH_SHORT).show();
                                         finish();
                                         startActivity(getIntent());
                                     }else {
